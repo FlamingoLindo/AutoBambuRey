@@ -9,6 +9,11 @@ def create_random_full_name():
     return name
 
 def create_random_first_name():
+    name = fake.name().split(' ')[0]
+    
+    return name
+
+def create_random_surname():
     name = fake.name().split(' ')[1]
     
     return name
