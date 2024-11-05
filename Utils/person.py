@@ -42,3 +42,10 @@ def create_password():
     password = fake.password()
     
     return password
+
+def create_birth_day():
+    birth_day = fake.date_of_birth()
+    
+    birth_day_br = birth_day.strftime("%d/%m/%Y")
+    
+    return birth_day_br
