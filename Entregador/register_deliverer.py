@@ -46,5 +46,29 @@ for i in range(num_accounts):
 
     confirm_password_input = driver.find_element(By.NAME, 'confirm_password')
     confirm_password_input.send_keys(PASSWORD)
+    confirm_password_input.submit()
+    
+    log_input = wait.until(EC.element_to_be_clickable((By.NAME, 'street')))
+    log_input.send_keys(create_address()[0])
+
+    number_input = driver.find_element(By.NAME, 'number')
+    number_input.send_keys(create_address()[1])
+
+    neighborhood_input = driver.find_element(By.NAME, 'neighborhood')
+    neighborhood_input.send_keys('Bairro')
+
+    city_input = driver.find_element(By.NAME, 'city')
+    city_input.send_keys(create_address()[2])
+
+    state_input = driver.find_element(By.NAME, 'uf')
+    state_input.send_keys(create_address()[4])
+
+    cep_input = wait.until(EC.element_to_be_clickable((By.NAME, 'cep')))
+    cep_input.send_keys(create_address()[3])
+    cep_input.submit()
+    
+    time.sleep(0.5)
+    
+    print(i)
 
 driver.quit()

@@ -57,5 +57,10 @@ for i in range(num_accounts):
 
     cep_input = wait.until(EC.element_to_be_clickable((By.ID, 'cep')))
     cep_input.send_keys(create_address()[3])
+    cep_input.submit()
+    
+    time.sleep(0.5)
+
+    print(i)
 
 driver.quit()

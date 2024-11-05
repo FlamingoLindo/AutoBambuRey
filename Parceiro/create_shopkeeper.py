@@ -99,7 +99,7 @@ for i in range(num_accounts):
 
     driver.switch_to.window(driver.window_handles[1])
 
-    time.sleep(6.5)
+    time.sleep(6.4)
     open_email = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/main/div[1]/div[3]/div[1]/table/tbody')))
     open_email.click()
     
@@ -120,5 +120,7 @@ for i in range(num_accounts):
     code_input = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="digit1"]')))
     code_input.send_keys(code)
     code_input.submit()
+    
+    print(i)
 
 driver.quit()

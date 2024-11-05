@@ -104,8 +104,8 @@ for i in range(num_accounts):
     next_btn.click()
 
     driver.switch_to.window(driver.window_handles[1])
-
-    time.sleep(6.5)
+    
+    time.sleep(11)
     open_email = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/main/div[1]/div[3]/div[1]/table/tbody')))
     open_email.click()
     

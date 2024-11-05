@@ -48,5 +48,11 @@ for i in range(num_accounts):
 
     youtube_input = driver.find_element(By.NAME, 'youtube')
     youtube_input.send_keys('https://www.youtube.com/channel/UC64RO26j3E4bJmkjnRGJ4Kg')
+    youtube_input.submit()
+    
+    time.sleep(0.5)
+
+
+    print(i)
 
 driver.quit()
