@@ -37,3 +37,8 @@ def create_phone():
     phone = random.randint(1111111111,99999999999)
     
     return phone
+
+def create_password():
+    password = fake.password()
+    
+    return password
