@@ -24,17 +24,17 @@ upload_file = os.path.abspath(
 driver = webdriver.Chrome()
 wait = WebDriverWait(driver, 30)
 
-driver.get(os.getenv('SHOPKEEPER'))
+driver.get(os.getenv('PROMOTER'))
 
 driver.execute_script("document.body.style.zoom = '0.4'")
 
 logo = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '.gOCSyD')))
 
-social_input = driver.find_element(By.NAME, 'company_name')
-social_input.send_keys(create_random_first_name())
+name_input = driver.find_element(By.NAME, 'name')
+name_input.send_keys(create_random_full_name())
 
-cnpj_input = driver.find_element(By.ID, 'cnpj')
-cnpj_input.send_keys(create_cnpj())
+birth_input = driver.find_element(By.NAME, 'birthdate')
+birth_input.send_keys(create_birth_day())
 
 driver.switch_to.new_window('tab')
 driver.get('https://www.invertexto.com/gerador-email-temporario')
@@ -50,16 +50,19 @@ email_input.send_keys(Keys.CONTROL, 'v')
 phone_input = driver.find_element(By.NAME, 'phone')
 phone_input.send_keys(create_phone())
 
-name_input = driver.find_element(By.NAME, 'company_name')
-name_input.send_keys(create_random_full_name())
-
 cpf_input = driver.find_element(By.NAME, 'cpf')
 cpf_input.send_keys(create_cpf())
+
+cnpj_input = driver.find_element(By.ID, 'cnpj')
+cnpj_input.send_keys(create_cnpj())
+
+social_input = driver.find_element(By.NAME, 'company_name')
+social_input.send_keys(create_random_first_name())
 
 document_input = driver.find_element(By.CSS_SELECTOR, "input[type='file']")
 document_input.send_keys(upload_file)
 
-accept_btn = driver.find_element(By.XPATH, '/html/body/main/div[2]/div[2]/form/div/div[8]/label[1]')
+accept_btn = driver.find_element(By.XPATH, '/html/body/main/div[2]/div/form/div/div[9]/label[1]')
 accept_btn.click()
 
 next_btn = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, '.cScPww')))
@@ -84,11 +87,14 @@ cep_input = wait.until(EC.element_to_be_clickable((By.NAME, 'cep')))
 cep_input.send_keys(create_address()[3])
 cep_input.submit()
 
-segment_dropdown = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/main/div[2]/div/form/div/div/div/div/div[1]')))
-segment_dropdown.click()
+expirience = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/main/div[2]/div/form/div/div[1]/div/label[2]')))
+expirience.click()
 
-acessories_option = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="react-select-segment-option-0"]')))
-acessories_option.click()
+internet = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/main/div[2]/div/form/div/div[2]/div/label[2]')))
+internet.click()
+
+tablet = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/main/div[2]/div/form/div/div[3]/div/label[2]')))
+tablet.click()
 
 next_btn = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, '.cScPww')))
 next_btn.click()
