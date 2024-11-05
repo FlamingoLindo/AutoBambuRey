@@ -15,6 +15,7 @@ sys.path.append(path_to_add)
 # UTILS
 from Utils.person import *
 from Utils.addres import *
+from Utils.Get_User_Input import *
 
 load_dotenv()
 
@@ -24,102 +25,107 @@ upload_file = os.path.abspath(
 driver = webdriver.Chrome()
 wait = WebDriverWait(driver, 30)
 
-driver.get(os.getenv('PROVIDER'))
+num_accounts = int(get_user_input('How may users'))
 
-driver.execute_script("document.body.style.zoom = '0.4'")
+for i in range(num_accounts):
+    driver.get(os.getenv('PROVIDER'))
 
-logo = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '.gOCSyD')))
+    driver.execute_script("document.body.style.zoom = '0.4'")
 
-name_input = driver.find_element(By.NAME, 'name')
-name_input.send_keys(create_random_full_name())
+    logo = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '.gOCSyD')))
 
-birth_input = driver.find_element(By.NAME, 'birthdate')
-birth_input.send_keys(create_birth_day())
+    name_input = driver.find_element(By.NAME, 'name')
+    name_input.send_keys(create_random_full_name())
 
-driver.switch_to.new_window('tab')
-driver.get('https://www.invertexto.com/gerador-email-temporario')
+    birth_input = driver.find_element(By.NAME, 'birthdate')
+    birth_input.send_keys(create_birth_day())
 
-copy_btn = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="copiar"]')))
-copy_btn.click()
+    driver.switch_to.new_window('tab')
+    driver.get('https://www.invertexto.com/gerador-email-temporario')
 
-driver.switch_to.window(driver.window_handles[0])
-
-email_input = driver.find_element(By.NAME, 'email')
-email_input.send_keys(Keys.CONTROL, 'v')
-
-phone_input = driver.find_element(By.NAME, 'phone')
-phone_input.send_keys(create_phone())
-
-cpf_input = driver.find_element(By.NAME, 'cpf')
-cpf_input.send_keys(create_cpf())
-
-cnpj_input = driver.find_element(By.ID, 'cnpj')
-cnpj_input.send_keys(create_cnpj())
-
-social_input = driver.find_element(By.NAME, 'company_name')
-social_input.send_keys(create_random_first_name())
-
-document_input = driver.find_element(By.CSS_SELECTOR, "input[type='file']")
-document_input.send_keys(upload_file)
-
-accept_btn = driver.find_element(By.XPATH, '/html/body/main/div[2]/div/form/div/div[9]/label[1]')
-accept_btn.click()
-
-next_btn = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, '.cScPww')))
-next_btn.click()
-
-log_input = wait.until(EC.element_to_be_clickable((By.NAME, 'street')))
-log_input.send_keys(create_address()[0])
-
-number_input = driver.find_element(By.NAME, 'number')
-number_input.send_keys(create_address()[1])
-
-neighborhood_input = driver.find_element(By.NAME, 'neighborhood')
-neighborhood_input.send_keys('Bairro')
-
-city_input = driver.find_element(By.NAME, 'city')
-city_input.send_keys(create_address()[2])
-
-state_input = driver.find_element(By.NAME, 'uf')
-state_input.send_keys(create_address()[4])
-
-cep_input = wait.until(EC.element_to_be_clickable((By.NAME, 'cep')))
-cep_input.send_keys(create_address()[3])
-cep_input.submit()
-
-segment_dropdown = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/main/div[2]/div/form/div/div/div/div/div[1]')))
-segment_dropdown.click()
-
-acessories_option = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="react-select-segment-option-0"]')))
-acessories_option.click()
-acessories_option.submit()
-
-driver.switch_to.window(driver.window_handles[1])
-
-open_email = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/main/div[1]/div[3]/div[1]/table/tbody')))
-open_email.click()
-
-text_element = wait.until(EC.element_to_be_selected((By.ID, 'body')))
-text = text_element.text
-
-code_match = re.search(r'\b[A-Z0-9]{6}\b', text)
-if code_match:
-    code = code_match.group(0)
-    print(f"The verification code is: {code}")
-else:
-    print("Verification code not found.")
+    copy_email = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="copiar"]')))
+    copy_email.click()
     
-delete_email_btn = driver.find_element(By.ID, 'lick-to-delete')
-delete_email_btn.click()
+    driver.switch_to.window(driver.window_handles[0])
 
-delete_email_btn = wait.until(EC.element_to_be_clickable((By.ID, 'lick-to-delete')))
-delete_email_btn.click()
+    email_input = driver.find_element(By.NAME, 'email')
+    email_input.send_keys(Keys.CONTROL, 'v')
 
-driver.switch_to.window(driver.window_handles[0])
+    phone_input = driver.find_element(By.NAME, 'phone')
+    phone_input.send_keys(create_phone())
 
-code_input = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="digit1"]')))
-code_input.send_keys(code)
-code_input.submit()
+    cpf_input = driver.find_element(By.NAME, 'cpf')
+    cpf_input.send_keys(create_cpf())
 
-time.sleep(10)
+    cnpj_input = driver.find_element(By.ID, 'cnpj')
+    cnpj_input.send_keys(create_cnpj())
+
+    social_input = driver.find_element(By.NAME, 'company_name')
+    social_input.send_keys(create_random_first_name())
+
+    document_input = driver.find_element(By.CSS_SELECTOR, "input[type='file']")
+    document_input.send_keys(upload_file)
+
+    accept_btn = driver.find_element(By.XPATH, '/html/body/main/div[2]/div/form/div/div[9]/label[1]')
+    accept_btn.click()
+
+    next_btn = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, '.cScPww')))
+    next_btn.click()
+
+    log_input = wait.until(EC.element_to_be_clickable((By.NAME, 'street')))
+    log_input.send_keys(create_address()[0])
+
+    number_input = driver.find_element(By.NAME, 'number')
+    number_input.send_keys(create_address()[1])
+
+    neighborhood_input = driver.find_element(By.NAME, 'neighborhood')
+    neighborhood_input.send_keys('Bairro')
+
+    city_input = driver.find_element(By.NAME, 'city')
+    city_input.send_keys(create_address()[2])
+
+    state_input = driver.find_element(By.NAME, 'uf')
+    state_input.send_keys(create_address()[4])
+
+    cep_input = wait.until(EC.element_to_be_clickable((By.NAME, 'cep')))
+    cep_input.send_keys(create_address()[3])
+    cep_input.submit()
+
+    segment_dropdown = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/main/div[2]/div/form/div/div/div/div/div[1]')))
+    segment_dropdown.click()
+
+    acessories_option = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="react-select-segment-option-0"]')))
+    acessories_option.click()
+    
+    next_btn = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, '.cScPww')))
+    next_btn.click()
+
+    driver.switch_to.window(driver.window_handles[1])
+
+    time.sleep(6.5)
+    open_email = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/main/div[1]/div[3]/div[1]/table/tbody')))
+    open_email.click()
+    
+    text_element = wait.until(EC.element_to_be_clickable((By.ID, 'body')))
+    text = text_element.text
+
+    code_match = re.search(r'\b[A-Z0-9]{6}\b', text)
+    if code_match:
+        code = code_match.group(0)
+        print(f"The verification code is: {code}")
+    else:
+        print("Verification code not found.")
+        
+    driver.close()
+        
+    driver.switch_to.window(driver.window_handles[0])
+
+    code_input = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="digit1"]')))
+    code_input.send_keys(code)
+    code_input.submit()
+
+    code_input = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="digit1"]')))
+    code_input.send_keys(code)
+    code_input.submit()
+
 driver.quit()

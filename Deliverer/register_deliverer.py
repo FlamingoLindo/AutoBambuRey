@@ -13,6 +13,7 @@ sys.path.append(path_to_add)
 # UTILS
 from Utils.person import *
 from Utils.addres import *
+from Utils.Get_User_Input import *
 
 load_dotenv()
 
@@ -21,27 +22,29 @@ PASSWORD = 12345678
 driver = webdriver.Chrome()
 wait = WebDriverWait(driver, 5)
 
-driver.get(os.getenv('INFLUENCER'))
+num_accounts = int(get_user_input('How may users'))
 
-logo = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '.gOCSyD')))
+for i in range(num_accounts):
+    driver.get(os.getenv('DELIVERER'))
 
-name_input = driver.find_element(By.NAME, 'name')
-name_input.send_keys(create_random_first_name())
+    logo = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '.gOCSyD')))
 
-surname_input = driver.find_element(By.NAME, 'lastName')
-surname_input.send_keys(create_random_surname())
+    name_input = driver.find_element(By.NAME, 'name')
+    name_input.send_keys(create_random_first_name())
 
-email_input = driver.find_element(By.NAME, 'email')
-email_input.send_keys(create_random_email())
+    surname_input = driver.find_element(By.NAME, 'lastName')
+    surname_input.send_keys(create_random_surname())
 
-cpf_input = driver.find_element(By.NAME, 'cpf')
-cpf_input.send_keys(create_cpf())
+    email_input = driver.find_element(By.NAME, 'email')
+    email_input.send_keys(create_random_email())
 
-password_input = driver.find_element(By.NAME, 'password')
-password_input.send_keys(PASSWORD)
+    cpf_input = driver.find_element(By.NAME, 'cpf')
+    cpf_input.send_keys(create_cpf())
 
-confirm_password_input = driver.find_element(By.NAME, 'confirm_password')
-confirm_password_input.send_keys(PASSWORD)
+    password_input = driver.find_element(By.NAME, 'password')
+    password_input.send_keys(PASSWORD)
 
-time.sleep(10)
+    confirm_password_input = driver.find_element(By.NAME, 'confirm_password')
+    confirm_password_input.send_keys(PASSWORD)
+
 driver.quit()
