@@ -44,8 +44,12 @@ def create_password():
     return password
 
 def create_birth_day():
-    birth_day = fake.date_of_birth()
-    
+    while True:
+        birth_day = fake.date_of_birth()
+        
+        if birth_day.year <= 2003:
+            break
+
     birth_day_br = birth_day.strftime("%d/%m/%Y")
     
     return birth_day_br
