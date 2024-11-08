@@ -1,6 +1,5 @@
 """
-This module imports necessary utility functions and classes from the 'Utils' package.
-It includes functions for user input, address generation, and person-related operations.
+This module is used for creating X amount of "Promotor" users.
 """
 
 import os

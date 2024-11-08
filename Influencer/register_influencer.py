@@ -1,24 +1,35 @@
+"""
+This module is used for creating X amount of "Influenciadores" users.
+"""
+
+import os
+import time
+import sys
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import os
-import time
-import sys
+
 from dotenv import load_dotenv
+
+from Utils.get_user_input import get_user_input
+from Utils.person import (
+    create_random_full_name,
+    create_phone,
+    create_random_email
+)
+
 
 path_to_add = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append(path_to_add)
 
 # UTILS
-from Utils.person import *
-from Utils.addres import *
-from Utils.Get_User_Input import *
 
 load_dotenv()
 
+
 driver = webdriver.Chrome()
-wait = WebDriverWait(driver, 5)
+wait = WebDriverWait(driver, 30)
 
 num_accounts = int(get_user_input('How may users'))
 
