@@ -12,6 +12,9 @@ from selenium.webdriver.support import expected_conditions as EC
 
 from dotenv import load_dotenv
 
+path_to_add = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(path_to_add)
+
 from Utils.get_user_input import get_user_input
 from Utils.addres import create_address
 from Utils.person import (
@@ -19,10 +22,6 @@ from Utils.person import (
     create_phone,
     create_cpf
 )
-
-
-path_to_add = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-sys.path.append(path_to_add)
 
 # UTILS
 

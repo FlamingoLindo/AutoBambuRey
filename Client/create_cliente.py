@@ -14,6 +14,8 @@ from appium.options.android import UiAutomator2Options
 from appium.webdriver.common.appiumby import AppiumBy
 from appium.webdriver.extensions.android.nativekey import AndroidKey
 
+path_to_add = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(path_to_add)
 
 from Utils.get_user_input import get_user_input
 from Utils.person import (
@@ -21,10 +23,6 @@ from Utils.person import (
     create_phone,
     create_birth_day
 )
-
-
-path_to_add = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-sys.path.append(path_to_add)
 
 # UTILS
 
