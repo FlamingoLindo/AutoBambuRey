@@ -19,12 +19,6 @@ sys.path.append(path_to_add)
 
 # UTILS
 from Utils.get_user_input import get_user_input
-from Utils.person import (
-    create_random_email,
-    create_random_first_name,
-    create_random_surname,
-    create_cpf
-)
 
 # Common
 from Common.logo_wait import wait_for_logo
@@ -34,7 +28,7 @@ from Common.person_input import (
     name_input,
     surname_input,
     email_input,
-    cfp_input
+    cpf_input
 )
 
 # Load env
@@ -56,7 +50,7 @@ for i in range(num_accounts):
 
     email_input(driver)
 
-    cfp_input(driver)
+    cpf_input(driver)
 
     password_input(wait, driver)
     
