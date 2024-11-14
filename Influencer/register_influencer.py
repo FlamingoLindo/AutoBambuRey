@@ -2,6 +2,7 @@
 This module is used for creating X amount of "Influenciadores" users.
 """
 
+# Imports
 import os
 import time
 import sys
@@ -9,43 +10,47 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
 
+# Import env
 from dotenv import load_dotenv
 
+# Load scripts
 path_to_add = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append(path_to_add)
 
+# Utils
 from Utils.get_user_input import get_user_input
-from Utils.person import (
-    create_random_full_name,
-    create_phone,
-    create_random_email
+
+# Common
+from Common.logo_wait import wait_for_logo
+from Common.click_next_btn import click_next_btn
+from Common.person_input import (
+    name_input,
+    email_input,
+    phone_input
 )
 
-# UTILS
-
+# Load env
 load_dotenv()
-
 
 driver = webdriver.Chrome()
 wait = WebDriverWait(driver, 30)
 
-num_accounts = int(get_user_input('How may users'))
+num_accounts = int(get_user_input('Qnt influenciadores'))
 
 for i in range(num_accounts):
     driver.get(os.getenv('INFLUENCER'))
 
-    logo = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '.gOCSyD')))
+    wait_for_logo(wait)
 
-    name_input = driver.find_element(By.NAME, 'name')
-    name_input.send_keys(create_random_full_name())
+    name_input(driver)
 
-    email_input = driver.find_element(By.NAME, 'email')
-    email_input.send_keys(create_random_email())
+    email_input(driver)
 
-    phone_input = driver.find_element(By.NAME, 'phone')
-    phone_input.send_keys(create_phone())
-    phone_input.submit()
+    phone_input(driver)
+
+    click_next_btn(wait, driver)
 
     facebook_input = wait.until(EC.element_to_be_clickable((By.NAME, 'facebook')))
     facebook_input.send_keys('https://www.facebook.com/mestresdaweboficial/')
@@ -55,13 +60,12 @@ for i in range(num_accounts):
 
     tiktok_input = driver.find_element(By.NAME, 'tiktok')
     tiktok_input.send_keys('https://www.tiktok.com/@mestresdaweb')
-
+    
     youtube_input = driver.find_element(By.NAME, 'youtube')
     youtube_input.send_keys('https://www.youtube.com/channel/UC64RO26j3E4bJmkjnRGJ4Kg')
     youtube_input.submit()
     
     time.sleep(0.5)
-
 
     print(i)
 

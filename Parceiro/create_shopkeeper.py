@@ -1,7 +1,8 @@
 """
-This module is used for creating X amount of "Parceuris" users.
+This module is used for creating X amount of "Parceiros" users.
 """
 
+# Imports
 import os
 import time
 import sys
@@ -12,46 +13,46 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 
+# Import env
 from dotenv import load_dotenv
 
+# Load scripts
 path_to_add = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append(path_to_add)
 
-from Utils.get_user_input import get_user_input
-from Utils.addres import create_address
-from Utils.person import (
-    create_random_full_name,
-    create_phone,
-    create_cpf,
-    create_cnpj,
-    create_random_first_name
-)
-
 # UTILS
+from Utils.get_user_input import get_user_input
+
+# Common
+from Common.logo_wait import wait_for_logo
+from Common.input_addres import input_addres
+from Common.person_input import (
+    social_input,
+    cnpj_input,
+    phone_input,
+    name_input,
+    cpf_input,
+)
+from Common.send_document import input_document
+from Common.click_next_btn import click_next_btn
 
 load_dotenv()
-
-upload_file = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "../Images", "document.png"))
 
 driver = webdriver.Chrome()
 wait = WebDriverWait(driver, 30)
 
-num_accounts = int(get_user_input('How may users'))
+num_accounts = int(get_user_input('Qnt parceiros'))
 
 for i in range(num_accounts):
     driver.get(os.getenv('SHOPKEEPER'))
 
     driver.execute_script("document.body.style.zoom = '0.4'")
 
-    logo = wait.until(EC.visibility_of_element_located(
-        (By.CSS_SELECTOR, '.gOCSyD')))
+    wait_for_logo(wait)
 
-    social_input = driver.find_element(By.NAME, 'company_name')
-    social_input.send_keys(create_random_first_name())
+    social_input(driver)
 
-    cnpj_input = driver.find_element(By.ID, 'cnpj')
-    cnpj_input.send_keys(create_cnpj())
+    cnpj_input(driver)
 
     driver.switch_to.new_window('tab')
     driver.get('https://www.invertexto.com/gerador-email-temporario')
@@ -65,45 +66,22 @@ for i in range(num_accounts):
     email_input = driver.find_element(By.NAME, 'email')
     email_input.send_keys(Keys.CONTROL, 'v')
 
-    phone_input = driver.find_element(By.NAME, 'phone')
-    phone_input.send_keys(create_phone())
+    phone_input(driver)
 
-    name_input = driver.find_element(By.NAME, 'name')
-    name_input.send_keys(create_random_full_name())
+    name_input(driver)
 
-    cpf_input = driver.find_element(By.NAME, 'cpf')
-    cpf_input.send_keys(create_cpf())
+    cpf_input(driver)
 
-    document_input = driver.find_element(By.CSS_SELECTOR, "input[type='file']")
-    document_input.send_keys(upload_file)
+    input_document(driver)
 
     accept_btn = driver.find_element(
         By.XPATH, '/html/body/main/div[2]/div[2]/form/div/div[8]/label[1]')
     accept_btn.click()
 
-    next_btn = wait.until(EC.element_to_be_clickable(
-        (By.CSS_SELECTOR, '.cScPww')))
-    next_btn.click()
+    click_next_btn(wait, driver)
 
-    log_input = wait.until(EC.element_to_be_clickable((By.NAME, 'street')))
-    log_input.send_keys(create_address()[0])
-
-    number_input = driver.find_element(By.NAME, 'number')
-    number_input.send_keys(create_address()[1])
-
-    neighborhood_input = driver.find_element(By.NAME, 'neighborhood')
-    neighborhood_input.send_keys('Bairro')
-
-    city_input = driver.find_element(By.NAME, 'city')
-    city_input.send_keys(create_address()[2])
-
-    state_input = driver.find_element(By.NAME, 'uf')
-    state_input.send_keys(create_address()[4])
-
-    cep_input = wait.until(EC.element_to_be_clickable((By.NAME, 'cep')))
-    cep_input.send_keys(create_address()[3])
-    cep_input.submit()
-
+    input_addres(wait, driver)
+    
     segment_dropdown = wait.until(EC.element_to_be_clickable(
         (By.XPATH, '/html/body/main/div[2]/div/form/div/div/div/div/div[1]')))
     segment_dropdown.click()
@@ -112,9 +90,7 @@ for i in range(num_accounts):
         (By.XPATH, '//*[@id="react-select-segment-option-0"]')))
     acessories_option.click()
 
-    next_btn = wait.until(EC.element_to_be_clickable(
-        (By.CSS_SELECTOR, '.cScPww')))
-    next_btn.click()
+    click_next_btn(wait, driver)
 
     driver.switch_to.window(driver.window_handles[1])
 
