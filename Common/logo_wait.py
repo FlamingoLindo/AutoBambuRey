@@ -10,7 +10,11 @@ def wait_for_logo(wait):
     """Wait untill the logo loads
 
     Args:
-        wait (_type_): _description_
+        wait (WebDriverWait): Selenium WebDriverWait instance used 
+        for waiting for elements to be in a certain state.
     """
-    logo = wait.until(EC.visibility_of_element_located(
-        (By.CSS_SELECTOR, '.cUYAoG')))
+    try:
+        logo = wait.until(EC.visibility_of_element_located(
+            (By.CSS_SELECTOR, '.cUYAoG')))
+    except Exception as e:
+        print('Error in "logo".\n', e)

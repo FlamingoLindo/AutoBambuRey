@@ -56,18 +56,30 @@ for i in range(num_accounts):
 
     birth_input(driver)
 
-    driver.switch_to.new_window('tab')
-    driver.get('https://www.invertexto.com/gerador-email-temporario')
+    try:
+        driver.switch_to.new_window('tab')
+        driver.get('https://www.invertexto.com/gerador-email-temporario')
+    except Exception as e:
+        print('Error in opening a new.\n', e)
 
-    copy_email = wait.until(EC.element_to_be_clickable(
-        (By.XPATH, '//*[@id="copiar"]')))
-    copy_email.click()
-
-    driver.switch_to.window(driver.window_handles[0])
-
-    email_input = driver.find_element(By.NAME, 'email')
-    email_input.send_keys(Keys.CONTROL, 'v')
-
+    try:
+        copy_email = wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '//*[@id="copiar"]')))
+        copy_email.click()
+    except Exception as e:
+        print('Error copying the email.\n', e)
+    
+    try:
+        driver.switch_to.window(driver.window_handles[0])
+    except Exception as e:
+        print('Error switching tabs.\n', e)
+    
+    try:
+        email_input = driver.find_element(By.NAME, 'email')
+        email_input.send_keys(Keys.CONTROL, 'v')
+    except Exception as e:
+        print('Error in pasting the email.\n', e)
+        
     phone_input(driver)
 
     cpf_input(driver)
@@ -78,57 +90,78 @@ for i in range(num_accounts):
 
     input_document(driver)
 
-    accept_btn = driver.find_element(
-        By.XPATH, '/html/body/main/div[2]/div/form/div/div[9]/label[1]')
-    accept_btn.click()
+    try:
+        accept_btn = driver.find_element(
+            By.XPATH, '/html/body/main/div[2]/div/form/div/div[9]/label[1]')
+        accept_btn.click()
+    except Exception as e:
+        print('Error in accepting the terms.\n', e)
 
     click_next_btn(wait, driver)
 
     input_addres(wait, driver)
 
-    expirience = wait.until(EC.element_to_be_clickable(
-        (By.XPATH, '/html/body/main/div[2]/div/form/div/div[1]/div/label[2]')))
-    expirience.click()
+    try:
+        expirience = wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/main/div[2]/div/form/div/div[1]/div/label[2]')))
+        expirience.click()
+    except Exception as e:
+        print('Error "expirience".\n', e)
 
-    internet = wait.until(EC.element_to_be_clickable(
-        (By.XPATH, '/html/body/main/div[2]/div/form/div/div[2]/div/label[2]')))
-    internet.click()
-
-    tablet = wait.until(EC.element_to_be_clickable(
-        (By.XPATH, '/html/body/main/div[2]/div/form/div/div[3]/div/label[2]')))
-    tablet.click()
+    try:
+        internet = wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/main/div[2]/div/form/div/div[2]/div/label[2]')))
+        internet.click()
+    except Exception as e:
+        print('Error  in "internet".\n', e)
+    
+    try:
+        tablet = wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/main/div[2]/div/form/div/div[3]/div/label[2]')))
+        tablet.click()
+    except Exception as e:
+        print('Error in "tablet".\n', e)
 
     click_next_btn(wait, driver)
 
-    driver.switch_to.window(driver.window_handles[1])
+    try:
+        driver.switch_to.window(driver.window_handles[1])
+    except Exception as e:
+        print('Error in switching window.\n', e)
+        
+    try:
+        time.sleep(11)
+        open_email = wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '/html/body/main/div[1]/div[3]/div[1]/table/tbody')))
+        open_email.click()
 
-    time.sleep(11)
-    open_email = wait.until(EC.element_to_be_clickable(
-        (By.XPATH, '/html/body/main/div[1]/div[3]/div[1]/table/tbody')))
-    open_email.click()
+        text_element = wait.until(EC.element_to_be_clickable((By.ID, 'body')))
+        text = text_element.text
 
-    text_element = wait.until(EC.element_to_be_clickable((By.ID, 'body')))
-    text = text_element.text
-
-    code_match = re.search(r'\b[A-Z0-9]{6}\b', text)
-    if code_match:
-        code = code_match.group(0)
-        print(f"The verification code is: {code}")
-    else:
-        print("Verification code not found.")
-
+        code_match = re.search(r'\b[A-Z0-9]{6}\b', text)
+        if code_match:
+            code = code_match.group(0)
+            print(f"The verification code is: {code}")
+        else:
+            print("Verification code not found.")
+    except Exception as e:
+        print('Error getting the verification code.\n', e)
+        
     driver.close()
 
     driver.switch_to.window(driver.window_handles[0])
 
-    code_input = wait.until(EC.element_to_be_clickable(
-        (By.XPATH, '//*[@id="digit1"]')))
-    code_input.send_keys(code)
-    code_input.submit()
+    try:
+        code_input = wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '//*[@id="digit1"]')))
+        code_input.send_keys(code)
+        code_input.submit()
 
-    code_input = wait.until(EC.element_to_be_clickable(
-        (By.XPATH, '//*[@id="digit1"]')))
-    code_input.send_keys(code)
-    code_input.submit()
+        code_input = wait.until(EC.element_to_be_clickable(
+            (By.XPATH, '//*[@id="digit1"]')))
+        code_input.send_keys(code)
+        code_input.submit()
+    except Exception as e:
+        print('Error in sending the code.\n', e)
 
 driver.quit()

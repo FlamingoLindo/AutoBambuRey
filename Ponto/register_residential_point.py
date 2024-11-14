@@ -8,6 +8,7 @@ import sys
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.action_chains import ActionChains
 
 # Import env
 from dotenv import load_dotenv
@@ -47,8 +48,12 @@ for i in range(num_accounts):
 
     phone_input(driver)
 
-    residential = driver.find_element(By.CSS_SELECTOR, '.eEcEoS')
-    residential.click()
+    try:
+        residential = driver.find_element(By.CSS_SELECTOR, '.eEcEoS')
+        ActionChains(driver).scroll_to_element(residential).perform()
+        residential.click()
+    except Exception as e:
+        print('Error selectin the "residentio" option.\n', e)
 
     cpf_input(driver)
     

@@ -17,12 +17,21 @@ def password_input(wait, driver):
     """Input password and password confirmation
 
     Args:
-        wait (_type_): _description_
-        driver (_type_): _description_
+        wait (WebDriverWait): Selenium WebDriverWait instance used 
+        for waiting for elements to be in a certain state.
+        
+        driver (WebDriver): Selenium WebDriver instance used 
+        for interacting with the browser.
     """
-    password_input = driver.find_element(By.NAME, 'password')
-    password_input.send_keys(PASSWORD)
-
-    confirm_password_input = driver.find_element(By.NAME, 'confirm_password')
-    confirm_password_input.send_keys(PASSWORD)
-    confirm_password_input.submit()
+    try:
+        password_input = driver.find_element(By.NAME, 'password')
+        password_input.send_keys(PASSWORD)
+    except Exception as e:
+        print('Error in "password".\n', e)
+    
+    try:
+        confirm_password_input = driver.find_element(By.NAME, 'confirm_password')
+        confirm_password_input.send_keys(PASSWORD)
+        confirm_password_input.submit()
+    except Exception as e:
+        print('Error in "password confirmation".\n', e)

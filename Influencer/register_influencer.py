@@ -52,19 +52,31 @@ for i in range(num_accounts):
 
     click_next_btn(wait, driver)
 
-    facebook_input = wait.until(EC.element_to_be_clickable((By.NAME, 'facebook')))
-    facebook_input.send_keys('https://www.facebook.com/mestresdaweboficial/')
+    try:
+        facebook_input = wait.until(EC.element_to_be_clickable((By.NAME, 'facebook')))
+        facebook_input.send_keys('https://www.facebook.com/mestresdaweboficial/')
+    except Exception as e:
+        print('Error in "facebook".\n', e)
 
-    instagram_input = driver.find_element(By.NAME, 'instagram')
-    instagram_input.send_keys('https://www.instagram.com/mestresdaweb/')
-
-    tiktok_input = driver.find_element(By.NAME, 'tiktok')
-    tiktok_input.send_keys('https://www.tiktok.com/@mestresdaweb')
+    try:
+        instagram_input = driver.find_element(By.NAME, 'instagram')
+        instagram_input.send_keys('https://www.instagram.com/mestresdaweb/')
+    except Exception as e:
+        print('Error in "instagram".\n', e)
     
-    youtube_input = driver.find_element(By.NAME, 'youtube')
-    youtube_input.send_keys('https://www.youtube.com/channel/UC64RO26j3E4bJmkjnRGJ4Kg')
-    youtube_input.submit()
-    
+    try:
+        tiktok_input = driver.find_element(By.NAME, 'tiktok')
+        tiktok_input.send_keys('https://www.tiktok.com/@mestresdaweb')
+    except Exception as e:
+        print('Error in "tik tok".\n', e)
+        
+    try:
+        youtube_input = driver.find_element(By.NAME, 'youtube')
+        youtube_input.send_keys('https://www.youtube.com/channel/UC64RO26j3E4bJmkjnRGJ4Kg')
+        youtube_input.submit()
+    except Exception as e:
+        print('Error in "youtube".\n', e)
+        
     time.sleep(0.5)
 
     print(i)

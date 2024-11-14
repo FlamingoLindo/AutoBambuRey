@@ -26,28 +26,38 @@ def name_input(driver):
     """Input the person's name
 
     Args:
-        driver (_type_): _description_
+        driver (WebDriver): Selenium WebDriver instance used 
+        for interacting with the browser.
     """
-    name_input = driver.find_element(By.NAME, 'name')
-    name_input.send_keys(create_random_first_name())
-    
+    try:
+        name_input = driver.find_element(By.NAME, 'name')
+        name_input.send_keys(create_random_first_name())
+    except Exception as e:
+        print('Error in "name".\n', e)
+        
 def surname_input(driver):
     """Input the person's surname
 
     Args:
         driver (_type_): _description_
     """
-    surname_input = driver.find_element(By.NAME, 'lastName')
-    surname_input.send_keys(create_random_surname())
-    
+    try:
+        surname_input = driver.find_element(By.NAME, 'lastName')
+        surname_input.send_keys(create_random_surname())
+    except Exception as e:
+        print('Error in "surname".\n', e)
+        
 def email_input(driver):
     """Input the person's email
 
     Args:
         driver (_type_): _description_
     """
-    email_input = driver.find_element(By.NAME, 'email')
-    email_input.send_keys(create_random_email())
+    try:
+        email_input = driver.find_element(By.NAME, 'email')
+        email_input.send_keys(create_random_email())
+    except Exception as e:
+        print('Error in "email".\n', e)
     
 def cpf_input(driver):
     """Input the person's CPF
@@ -55,8 +65,11 @@ def cpf_input(driver):
     Args:
         driver (_type_): _description_
     """
-    cpf_input = driver.find_element(By.NAME, 'cpf')
-    cpf_input.send_keys(create_cpf())
+    try:
+        cpf_input = driver.find_element(By.NAME, 'cpf')
+        cpf_input.send_keys(create_cpf())
+    except Exception as e:
+        print('Error in "CPF".\n', e)
     
 def phone_input(driver):
     """Input the person's phone
@@ -64,17 +77,23 @@ def phone_input(driver):
     Args:
         driver (_type_): _description_
     """
-    phone_input = driver.find_element(By.NAME, 'phone')
-    phone_input.send_keys(create_phone())
-
+    try:
+        phone_input = driver.find_element(By.NAME, 'phone')
+        phone_input.send_keys(create_phone())
+    except Exception as e:
+        print('Error in "telefone".\n', e)
+        
 def social_input(driver):
     """Input the person's social name
 
     Args:
         driver (_type_): _description_
     """
-    social_input = driver.find_element(By.NAME, 'company_name')
-    social_input.send_keys(create_random_first_name())
+    try:
+        social_input = driver.find_element(By.NAME, 'company_name')
+        social_input.send_keys(create_random_first_name())
+    except Exception as e:
+        print('Error in "razão social".\n', e)
     
 def cnpj_input(driver):
     """Input the user's CNPJ
@@ -82,8 +101,11 @@ def cnpj_input(driver):
     Args:
         driver (_type_): _description_
     """
-    cnpj_input = driver.find_element(By.ID, 'cnpj')
-    cnpj_input.send_keys(create_cnpj())
+    try:
+        cnpj_input = driver.find_element(By.ID, 'cnpj')
+        cnpj_input.send_keys(create_cnpj())
+    except Exception as e:
+        print('Error in "CNPJ".\n', e)
     
 def birth_input(driver):
     """Input the user's birth date
@@ -91,5 +113,8 @@ def birth_input(driver):
     Args:
         driver (_type_): _description_
     """
-    birth_input = driver.find_element(By.NAME, 'birthdate')
-    birth_input.send_keys(create_birth_day())
+    try:
+        birth_input = driver.find_element(By.NAME, 'birthdate')
+        birth_input.send_keys(create_birth_day())
+    except Exception as e:
+        print('Error in "data de nascimento".\n', e)

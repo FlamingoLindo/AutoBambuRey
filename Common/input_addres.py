@@ -20,28 +20,49 @@ def input_addres(wait, driver):
     """Input addres elements
 
     Args:
-        wait (_type_): _description_
-        driver (_type_): _description_
+        wait (WebDriverWait): Selenium WebDriverWait instance used 
+        for waiting for elements to be in a certain state.
+        
+        driver (WebDriver): Selenium WebDriver instance used 
+        for interacting with the browser.
     """
     rua, numero, cidade, cep, estado = create_address()
     
-    log_input = wait.until(EC.element_to_be_clickable((By.NAME, 'street')))
-    log_input.send_keys(rua)
+    try:
+        log_input = wait.until(EC.element_to_be_clickable((By.NAME, 'street')))
+        log_input.send_keys(rua)
+    except Exception as e:
+        print('Error in "logradouro".\n', e)
 
-    number_input = driver.find_element(By.NAME, 'number')
-    number_input.send_keys(numero)
+    try:
+        number_input = driver.find_element(By.NAME, 'number')
+        number_input.send_keys(numero)
+    except Exception as e:
+        print('Error in "número".\n', e)
+    
+    try:
+        neighborhood_input = driver.find_element(By.NAME, 'neighborhood')
+        neighborhood_input.send_keys('Bairro')
+    except Exception as e:
+        print('Error in "bairro".\n', e)
 
-    neighborhood_input = driver.find_element(By.NAME, 'neighborhood')
-    neighborhood_input.send_keys('Bairro')
+    try:
+        city_input = driver.find_element(By.NAME, 'city')
+        city_input.send_keys(cidade)
+    except Exception as e:
+        print('Error in "cidade".\n', e)
+    
+    try:
+        state_input = driver.find_element(By.NAME, 'uf')
+        state_input.send_keys(estado)
+    except Exception as e:
+        print('Error in "estado".\n', e)
 
-    city_input = driver.find_element(By.NAME, 'city')
-    city_input.send_keys(cidade)
-
-    state_input = driver.find_element(By.NAME, 'uf')
-    state_input.send_keys(estado)
-
-    cep_input = wait.until(EC.element_to_be_clickable((By.NAME, 'cep')))
-    cep_input.send_keys(cep)
-    cep_input.submit()
+    try:
+        cep_input = wait.until(EC.element_to_be_clickable((By.NAME, 'cep')))
+        cep_input.send_keys(cep)
+        cep_input.submit()
+    except Exception as e:
+        print('Error in "CEP".\n', e)
 
     time.sleep(0.5)

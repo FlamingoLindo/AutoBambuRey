@@ -39,7 +39,6 @@ APPIUM_SERVER_URL = 'http://localhost:4723'
 
 PASSWORD = 'Aa12345678!'
 
-
 class TestAppium(unittest.TestCase):
     """
     Test case for automating the process of creating users and 
