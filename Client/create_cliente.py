@@ -77,7 +77,7 @@ class TestAppium(unittest.TestCase):
         wait.until(EC.visibility_of_element_located(
             (AppiumBy.ACCESSIBILITY_ID, 'Menu'))
         )
-
+        
         profile_btn = wait.until(EC.element_to_be_clickable(
             (AppiumBy.ACCESSIBILITY_ID, 'Perfil'))
         )

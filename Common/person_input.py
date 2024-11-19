@@ -35,6 +35,7 @@ def name_input(driver):
     except Exception as e:
         print('Error in "name".\n', e)
         
+        
 def surname_input(driver):
     """Input the person's surname
 
@@ -47,6 +48,7 @@ def surname_input(driver):
     except Exception as e:
         print('Error in "surname".\n', e)
         
+        
 def email_input(driver):
     """Input the person's email
 
@@ -58,6 +60,7 @@ def email_input(driver):
         email_input.send_keys(create_random_email())
     except Exception as e:
         print('Error in "email".\n', e)
+        
     
 def cpf_input(driver):
     """Input the person's CPF
@@ -70,6 +73,7 @@ def cpf_input(driver):
         cpf_input.send_keys(create_cpf())
     except Exception as e:
         print('Error in "CPF".\n', e)
+        
     
 def phone_input(driver):
     """Input the person's phone
@@ -83,6 +87,7 @@ def phone_input(driver):
     except Exception as e:
         print('Error in "telefone".\n', e)
         
+        
 def social_input(driver):
     """Input the person's social name
 
@@ -94,6 +99,7 @@ def social_input(driver):
         social_input.send_keys(create_random_first_name())
     except Exception as e:
         print('Error in "razão social".\n', e)
+        
     
 def cnpj_input(driver):
     """Input the user's CNPJ
@@ -106,6 +112,7 @@ def cnpj_input(driver):
         cnpj_input.send_keys(create_cnpj())
     except Exception as e:
         print('Error in "CNPJ".\n', e)
+        
     
 def birth_input(driver):
     """Input the user's birth date
@@ -118,3 +125,4 @@ def birth_input(driver):
         birth_input.send_keys(create_birth_day())
     except Exception as e:
         print('Error in "data de nascimento".\n', e)
+        
