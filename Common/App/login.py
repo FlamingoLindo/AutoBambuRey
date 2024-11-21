@@ -17,7 +17,7 @@ def app_login(wait, email, self):
     email_input.send_keys(email)
     
     password = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Digite sua senha aqui")')
-    password.send_keys('Aa123@')
+    password.send_keys('Aa12345678!@')
     
     login_btn = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Entrar")')
     login_btn.click()

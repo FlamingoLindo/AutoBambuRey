@@ -104,9 +104,8 @@ class TestAppium(unittest.TestCase):
         
             self.driver.swipe(start_x=500, start_y=2000, end_x=500, end_y=460, duration=800)
             color_dropdown = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Selecione as cores")')
-            color_dropdown.send_keys('Preto')
-            # color_dropdown.click()
-            # self.driver.tap([(127, 566)])
+            color_dropdown.click()
+            self.driver.tap([(127, 566)])
 
             close_color = wait.until(EC.visibility_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Preto").instance(0)')))
             close_color.click()
