@@ -24,17 +24,17 @@ sys.path.append(path_to_add)
 from Utils.get_user_input import get_user_input
 
 # Common
-from Common.logo_wait import wait_for_logo
-from Common.input_addres import input_addres
-from Common.person_input import (
+from Common.Web.logo_wait import wait_for_logo
+from Common.Web.input_addres import input_addres
+from Common.Web.person_input import (
     social_input,
     cnpj_input,
     phone_input,
     name_input,
     cpf_input,
 )
-from Common.send_document import input_document
-from Common.click_next_btn import click_next_btn
+from Common.Web.send_document import input_document
+from Common.Web.click_next_btn import click_next_btn
 
 load_dotenv()
 

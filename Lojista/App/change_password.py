@@ -18,14 +18,7 @@ from appium.webdriver.extensions.android.nativekey import AndroidKey
 path_to_add = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.append(path_to_add)
 
-from Utils.get_user_input import get_user_input
-from Utils.person import (
-    create_random_full_name,
-    create_phone,
-    create_birth_day
-)
-
-from Common.App.login import app_login
+from Common.App.lojista_login import app_lojista_login
 
 # UTILS
 
@@ -62,7 +55,7 @@ class TestAppium(unittest.TestCase):
         """        
         wait = WebDriverWait(self.driver, 10)
         
-        app_login(wait, 'vitorantunes2003@gmail.com', self)
+        app_lojista_login(wait, 'vitorantunes2003@gmail.com', self)
         
         menu_btn = wait.until(EC.visibility_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Menu")')))
         menu_btn.click()

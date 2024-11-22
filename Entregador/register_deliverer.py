@@ -21,10 +21,10 @@ sys.path.append(path_to_add)
 from Utils.get_user_input import get_user_input
 
 # Common
-from Common.logo_wait import wait_for_logo
-from Common.input_addres import input_addres
-from Common.password_input import password_input
-from Common.person_input import (
+from Common.Web.logo_wait import wait_for_logo
+from Common.Web.input_addres import input_addres
+from Common.Web.password_input import password_input
+from Common.Web.person_input import (
     name_input,
     surname_input,
     email_input,

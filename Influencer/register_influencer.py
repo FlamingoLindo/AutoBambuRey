@@ -23,9 +23,9 @@ sys.path.append(path_to_add)
 from Utils.get_user_input import get_user_input
 
 # Common
-from Common.logo_wait import wait_for_logo
-from Common.click_next_btn import click_next_btn
-from Common.person_input import (
+from Common.Web.logo_wait import wait_for_logo
+from Common.Web.click_next_btn import click_next_btn
+from Common.Web.person_input import (
     name_input,
     email_input,
     phone_input
