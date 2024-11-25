@@ -1,17 +1,23 @@
+import time
 from selenium.webdriver.support import expected_conditions as EC
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.common.exceptions import TimeoutException
 
-def app_scroll(wait, self, locator_type, value):
-    element = wait.until(EC.presence_of_element_located((locator_type, value)))
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.actions import interaction
+from selenium.webdriver.common.actions.action_builder import ActionBuilder
+from selenium.webdriver.common.actions.pointer_input import PointerInput
 
-    self.driver.execute_script("mobile: scrollGesture", {
-        "elementId": element.id,  # ID of the target element
-        "direction": "down",       # Scroll direction ('up', 'down')
-        "percent": 1.4,            # Larger scroll (150%)
-    })
+def app_scroll(driver):
+    actions = ActionChains(driver)
+    actions.w3c_actions = ActionBuilder(driver, mouse=PointerInput(interaction.POINTER_TOUCH, "touch"))
+    actions.w3c_actions.pointer_action.move_to_location(540, 1933)
+    actions.w3c_actions.pointer_action.pointer_down()
+    actions.w3c_actions.pointer_action.move_to_location(540, 1540)
+    actions.w3c_actions.pointer_action.release()
+    actions.perform()
         
-import time
+
 
 def select_category_and_subcategories(self, wait, category_locator, category_value, subcategory_locators):
     """
