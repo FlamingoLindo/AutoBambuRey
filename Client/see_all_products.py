@@ -866,6 +866,7 @@ class TestAppium(unittest.TestCase):
         ]
         select_category_and_subcategories(self, wait, category_locator, category_value, subcategory_locators)
         
+        print('Done')
         time.sleep(10)
               
 if __name__ == '__main__':
