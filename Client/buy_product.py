@@ -61,6 +61,7 @@ class TestAppium(unittest.TestCase):
             print('Menu encontrado')
         except Exception as e:
             print('Error waiting for "Menu" to appear:', e)
+            
         
         try:
             profile_btn = wait.until(EC.element_to_be_clickable((AppiumBy.ACCESSIBILITY_ID, 'Perfil')))
@@ -98,7 +99,7 @@ class TestAppium(unittest.TestCase):
             print('Error clicking on "Entrar" button:', e)
 
         try:
-            search_btn = wait.until(EC.visibility_of_element_located((AppiumBy.ACCESSIBILITY_ID, 'Pesquisar por nome/id do produto')))
+            search_btn = wait.until(EC.visibility_of_element_located((AppiumBy.ACCESSIBILITY_ID, 'Pesquisar por nome/id do produto e nome serviço')))
             search_btn.click()
             print('Busca encontrada')
         except Exception as e:

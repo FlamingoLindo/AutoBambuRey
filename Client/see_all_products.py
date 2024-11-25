@@ -53,10 +53,8 @@ class TestAppium(unittest.TestCase):
 
     def test_see_all_products(self) -> None:
         """
-        
         """
-        
-        wait = WebDriverWait(self.driver, 7)
+        wait = WebDriverWait(self.driver, 5)
         
         time.sleep(6)
         
@@ -867,8 +865,10 @@ class TestAppium(unittest.TestCase):
             (AppiumBy.ACCESSIBILITY_ID, "Internação"),
         ]
         select_category_and_subcategories(self, wait, category_locator, category_value, subcategory_locators)
-
+        
         time.sleep(10)
               
 if __name__ == '__main__':
     unittest.main()
+    
+    

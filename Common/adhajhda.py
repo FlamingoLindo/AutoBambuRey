@@ -38,7 +38,7 @@ def select_category_and_subcategories(self, wait, category_locator, category_val
         )))
         category_element.click()
         print(f"Category '{category_value}' selected.")
-        
+        time.sleep(0.5)
         # Iterate through the list of subcategories
         for subcategory_locator, subcategory_value in subcategory_locators:
             try:
@@ -61,7 +61,7 @@ def select_category_and_subcategories(self, wait, category_locator, category_val
             AppiumBy.ANDROID_UIAUTOMATOR, 
             'new UiSelector().className("android.view.ViewGroup").instance(14)'
         )))
-        time.sleep(1)
+        time.sleep(1.5)
         another_button.click()
         
     except Exception as e:
@@ -70,6 +70,7 @@ def select_category_and_subcategories(self, wait, category_locator, category_val
 
 
 def teste(self, wait, subcategory):
+    total_value = 0
     end_x_ = 500
     end_y_ = 1630
     max_retries = 1
@@ -77,19 +78,21 @@ def teste(self, wait, subcategory):
     while retry_count < max_retries:
         try:
             # Try to find the element with "0 Vendido(s)"
-            wait.until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().textContains("Vendido(s)")')))
-            print(f'Ad with "0 Vendido(s)" found in the "{subcategory}" tab!\n')
-            # If the ad with "0 Vendido(s)" is found, you can proceed with your logic
+            ad = wait.until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().textContains("R$")')))
+            print(f'Ad with "R$" found in the "{subcategory}" tab!')
+            print(ad.text, '\n')
+            # If the ad with "R$" is found, you can proceed with your logic
             another_button = wait.until(EC.visibility_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().className("com.horcrux.svg.PathView").instance(0))')))
             another_button.click()
             break
         except TimeoutException:
-            print(f'No ad with "0 Vendido(s)" found in "{subcategory}", trying to find "R$"...\n')
+            print(f'No ad with "R$" found in "{subcategory}", trying to find "Vendido(s)"...\n')
             try:
-                # If "0 Vendido(s)" is not found, try to find an element with "R$"
-                wait.until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().textContains("R$")')))
-                print(f'Found "R$" in the "{subcategory}" tab!\n')
-                # Proceed with your logic after finding "R$"
+                # If "R$" is not found, try to find an element with "Vendido(s)"
+                ad = wait.until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().textContains("Vendido(s)")')))
+                print(f'Found "Vendido(s)" in the "{subcategory}" tab!')
+                print(ad.text, '\n')
+                # Proceed with your logic after finding "Vendido(s)"
                 another_button = wait.until(EC.visibility_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().className("com.horcrux.svg.PathView").instance(0))')))
                 another_button.click()
                 break
