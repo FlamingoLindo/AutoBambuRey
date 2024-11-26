@@ -1,0 +1,8 @@
+{
+    "python.testing.pytestArgs": [
+        "Client",
+        "Lojista/App"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}
