@@ -20,6 +20,12 @@ from Common.App.lojista_login import app_lojista_login
 
 from Utils.person import create_cnpj, create_random_first_name
 
+TEST_TITLE = 'CONTA BANCÁRIA'
+QA = 'VITOR FLAMINGO LINDO'
+BACK = 'LUCAS LIZO'
+MOBILE = 'LUCIANO ESPONJAS'
+FRONT = '-'
+
 class TestBankAccount(unittest.TestCase):
 
     def setUp(self) -> None:
@@ -68,10 +74,10 @@ class TestBankAccount(unittest.TestCase):
         actions.w3c_actions.pointer_action.release()
         actions.perform()
 
-        edit_btn = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Editar")')
-        edit_btn.click
+        edit_btn = wait.until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Editar")')))
+        edit_btn.click()
         
-        cnpj_input = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.view.ViewGroup").instance(24)')
+        cnpj_input = wait.until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().textContains("/")')))
         cnpj_input.clear()
         cnpj_input.send_keys(create_cnpj())
         
@@ -117,7 +123,7 @@ class TestBankAccount(unittest.TestCase):
         actions.w3c_actions.pointer_action.release()
         actions.perform()
         
-        save_btn = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Salvar")')
+        save_btn = wait.until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Salvar")')))
         save_btn.click()
         
         sucess_modal = wait.until(EC.visibility_of_element_located((AppiumBy.ACCESSIBILITY_ID, 'Continuar')))

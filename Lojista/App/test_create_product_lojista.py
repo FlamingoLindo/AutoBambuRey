@@ -21,13 +21,16 @@ from Utils.get_user_input import get_user_input
 from Common.App.lojista_login import app_lojista_login
 from Common.App.add_lip_stick_images import add_lip_stick_images, add_color_image
 
-class TestCreateProduct(unittest.TestCase):
+TEST_TITLE = 'CRIAÇÃO DE Lojista'
+QA = 'VITOR FLAMINGO LINDO'
+BACK = 'LUCAS LIZO'
+MOBILE = 'LUCIANO ESPONJAS'
+
+class TestCreateProductLojista(unittest.TestCase):
     """
     Test case for automating the process of creating products.
     """
-
-    amount = 0
-
+    
     def setUp(self) -> None:
         capabilities = dict(
         noReset=True,
@@ -59,6 +62,7 @@ class TestCreateProduct(unittest.TestCase):
         amount = int(get_user_input('How many'))
         for i in range(amount):
             add_btn = wait.until(EC.visibility_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Adicionar")')))
+            assert add_btn.is_displayed(), 'Botão "Adicionar" não encontrado!'
             add_btn.click()
             print('Botão "Adicionar" clicado.')
 
@@ -174,6 +178,10 @@ class TestCreateProduct(unittest.TestCase):
                 gar_day_input.send_keys(rand_gar_day)
                 print('Grantia adicionada')
                 
+                card_point = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Pontua no cartão fidelidade")')
+                card_point.click()
+                print('Opção de cartão fidelidade ativada')
+                
 
             else:
                 no_gar = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Não tem")')
@@ -184,20 +192,25 @@ class TestCreateProduct(unittest.TestCase):
                 card_point.click()
                 print('Opção de cartão fidelidade ativada')
      
-                time.sleep(0.8)
-                save_btn = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Salvar")')
-                save_btn.click()
-                print('Botão "Salver" clicado')
-
-                continue_modal = wait.until(EC.visibility_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Continuar")')))
-                continue_modal.click()
-                print('Botão "Continuar" clicado')
+            time.sleep(0.8)
+            save_btn = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Salvar")')
+            assert save_btn.is_displayed(), 'Botão "Salvar" não encontrado!'
+            save_btn.click()
+            print('Botão "Salvar" clicado')
+            
+            continue_modal = wait.until(EC.visibility_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Continuar")')))
+            assert continue_modal.is_displayed, 'Modal não encontrado'
+            continue_modal.click()
+            print('Botão "Continuar" clicado')
 
             print(f'Product {i + 1} created.\n')
 
-            pending_list = wait.until(EC.visibility_of_element_located((AppiumBy.ACCESSIBILITY_ID, 'Pendentes')))
-            pending_list.click()
+    def test_03_pending_list(self):
+        pending_list = wait.until(EC.visibility_of_element_located((AppiumBy.ACCESSIBILITY_ID, 'Pendentes')))
+        pending_list.click()
         
+        pending_ad = wait.until(EC.visibility_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().descriptionContains("Batom automático")')))
+        assert pending_ad.is_displayed()
 
 if __name__ == '__main__':
     unittest.main()
