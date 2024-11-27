@@ -8,7 +8,7 @@ def app_lojista_login(wait, self):
     email_input = wait.until(EC.visibility_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().textContains("Digite seu e-mail")')))
     email_input.send_keys(os.getenv('LOJ_EMAIL'))
 
-    password = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().textContains("Digite sua senha")')
+    password = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Digite sua senha aqui")')
     password.send_keys(os.getenv('LOJ_PASS'))
 
     login_btn = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Entrar")')
@@ -17,7 +17,7 @@ def app_lojista_login(wait, self):
     try:
         # Wait for the error message if it appears
         error_msg = wait.until(EC.visibility_of_element_located(
-            (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().textContains("E-mail")')
+            (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().textContains("E-mail obrigatório")')
         ))
         # If the error message appears, assert failure
         assert False, error_msg.text == 'E-mail obrigatório'; f"Unexpected error message: {error_msg.text}"

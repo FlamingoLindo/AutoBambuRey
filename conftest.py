@@ -1,12 +1,9 @@
-import base64  
-import os  
-import pytest  
-import pytest_html  
 from pytest_metadata.plugin import metadata_key  
 
 from Lojista.App.test_bank_account import (TEST_TITLE, QA, BACK, MOBILE)
 from Lojista.App.test_create_product_lojista import (TEST_TITLE, QA, BACK, MOBILE)
 from Promotor.App.test_create_product_promotor import (TEST_TITLE, QA, BACK, MOBILE)
+from Lojista.App.test_add_cupom import (TEST_TITLE, QA, BACK, MOBILE)
   
   
 def pytest_html_report_title(report):  
