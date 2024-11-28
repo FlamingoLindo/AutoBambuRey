@@ -1,3 +1,7 @@
+"""
+Add X amount of cupons
+"""
+
 import time
 import os
 import sys
@@ -52,9 +56,15 @@ class TestCreateCupon(unittest.TestCase):
             self.driver.quit()
     
     def test_01_login(self) -> None:
+        """
+        Test login
+        """
         app_lojista_login(wait, self)
         
     def test_02_open_cupons_page(self) -> None:
+        """
+        Test open "Cadastro de Cupons" page
+        """
         menu_btn = wait.until(EC.element_to_be_clickable((AppiumBy.ACCESSIBILITY_ID, 'Menu')))
         menu_btn.click()
         
@@ -62,9 +72,10 @@ class TestCreateCupon(unittest.TestCase):
         cupons_opt.click()
 
     def test_03_create_cupon(self) -> None:
-        
-        amount = int(get_user_input('How many?'))
-        
+        """
+        Test create X amount of cupons
+        """
+        amount = 2
         for i in range(amount):
             add_btn = wait.until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("+")')))
             add_btn.click()

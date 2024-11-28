@@ -16,15 +16,13 @@ from appium.webdriver.common.appiumby import AppiumBy
 path_to_add = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.append(path_to_add)
 
-from Utils.get_user_input import get_user_input
-
 from Common.App.lojista_login import app_lojista_login
 from Common.App.add_lip_stick_images import add_lip_stick_images, add_color_image
 
 TEST_TITLE = 'CRIAÇÃO DE Lojista'
-QA = 'VITOR FLAMINGO LINDO'
-BACK = 'LUCAS LIZO'
-MOBILE = 'LUCIANO ESPONJAS'
+QA = 'Vitor Flamingo Lindo'
+BACK = 'Lucas Lizo'
+MOBILE = 'Luciano Esponjas'
 
 class TestCreateProductLojista(unittest.TestCase):
     """
@@ -56,10 +54,16 @@ class TestCreateProductLojista(unittest.TestCase):
             self.driver.quit()
     
     def test_01_login(self) -> None:
+        """
+        Test login
+        """
         app_lojista_login(wait, self)
         
     def test_02_create_product(self):
-        amount = int(get_user_input('How many'))
+        """
+        Test create product
+        """
+        amount = 2
         for i in range(amount):
             add_btn = wait.until(EC.visibility_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Adicionar")')))
             assert add_btn.is_displayed(), 'Botão "Adicionar" não encontrado!'
@@ -206,6 +210,9 @@ class TestCreateProductLojista(unittest.TestCase):
             print(f'Product {i + 1} created.\n')
 
     def test_03_pending_list(self):
+        """
+        Test open pending list
+        """
         pending_list = wait.until(EC.visibility_of_element_located((AppiumBy.ACCESSIBILITY_ID, 'Pendentes')))
         pending_list.click()
         

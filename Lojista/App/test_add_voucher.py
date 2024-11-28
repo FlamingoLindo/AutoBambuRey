@@ -1,3 +1,7 @@
+"""
+Add X amount of vouchers
+"""
+
 import time
 import os
 import sys
@@ -52,19 +56,26 @@ class TestCreateVoucher(unittest.TestCase):
             self.driver.quit()
     
     def test_01_login(self) -> None:
+        """
+        Test login
+        """
         app_lojista_login(wait, self)
         
-    def test_02_open_cupons_page(self) -> None:
+    def test_02_open_vouchers_page(self) -> None:
+        """
+        Test open vouchers page
+        """
         menu_btn = wait.until(EC.element_to_be_clickable((AppiumBy.ACCESSIBILITY_ID, 'Menu')))
         menu_btn.click()
         
-        cupons_opt = wait.until(EC.element_to_be_clickable((AppiumBy.ACCESSIBILITY_ID, 'Vouchers')))
-        cupons_opt.click()
+        vouchers_opt = wait.until(EC.element_to_be_clickable((AppiumBy.ACCESSIBILITY_ID, 'Vouchers')))
+        vouchers_opt.click()
 
     def test_03_create_voucher(self) -> None:
-        
-        amount = int(get_user_input('How many?'))
-        
+        """
+        Test create voucher
+        """
+        amount = 2
         for i in range(amount):
             add_btn = wait.until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("+")')))
             add_btn.click()

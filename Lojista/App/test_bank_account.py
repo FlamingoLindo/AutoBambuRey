@@ -1,4 +1,6 @@
-import time
+"""
+Test add/edit bank account
+"""
 import os
 import sys
 import random
@@ -21,10 +23,9 @@ from Common.App.lojista_login import app_lojista_login
 from Utils.person import create_cnpj, create_random_first_name
 
 TEST_TITLE = 'CONTA BANCÁRIA'
-QA = 'Vitor FLAMINGO LINDO'
-BACK = 'LUCAS LIZO'
-MOBILE = 'LUCIANO ESPONJAS'
-FRONT = '-'
+QA = 'Vitor Flamingo Lindo'
+BACK = 'Lucas Lizo'
+MOBILE = 'Luciano Esponjas'
 
 class TestBankAccount(unittest.TestCase):
 
@@ -53,9 +54,15 @@ class TestBankAccount(unittest.TestCase):
             self.driver.quit()
     
     def test_01_login(self) -> None:
+        """
+        Test login
+        """
         app_lojista_login(wait, self)
         
     def test_02_open_bank_acc_opt(self) -> None:
+        """
+        Test open "Conta bancária" page
+        """
         menu_btn = wait.until(EC.element_to_be_clickable((AppiumBy.ACCESSIBILITY_ID, 'Menu')))
         menu_btn.click()
         
@@ -66,6 +73,9 @@ class TestBankAccount(unittest.TestCase):
         bank_opt.click()
 
     def test_03_add_bank(self) -> None:
+        """
+        Test add/edit bank account
+        """
         actions = ActionChains(self.driver)
         actions.w3c_actions = ActionBuilder(self.driver, mouse=PointerInput(interaction.POINTER_TOUCH, "touch"))
         actions.w3c_actions.pointer_action.move_to_location(500, 2000)
@@ -130,7 +140,6 @@ class TestBankAccount(unittest.TestCase):
         sucess_modal.click()
         
         logo = wait.until(EC.visibility_of_element_located(AppiumBy.ACCESSIBILITY_ID, 'Dados da loja'))
-        
-        
+
 if __name__ == '__main__':
     unittest.main()

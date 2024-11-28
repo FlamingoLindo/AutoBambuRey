@@ -1,11 +1,10 @@
 """
-Create X amount of products
+Create a X amount of stores by the "Promotor" user.
 """
 
 import time
 import os
 import sys
-import random
 import unittest
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -32,7 +31,7 @@ MOBILE = 'Luciano Esponjas'
 
 class TestCreateStorePromotor(unittest.TestCase):
     """
-    Test case for automating the process of creating products.
+    Test case for automating the process of creating stores.
     """
     
     def setUp(self) -> None:
@@ -60,6 +59,9 @@ class TestCreateStorePromotor(unittest.TestCase):
             self.driver.quit()
     
     def test_01_login(self) -> None:
+        """
+        Test login
+        """
         email_input = wait.until(EC.visibility_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().textContains("Digite seu e-mail")')))
         email_input.send_keys(os.getenv('PRO_EMAIL'))
 
@@ -82,6 +84,9 @@ class TestCreateStorePromotor(unittest.TestCase):
             print('Login realizado com sucesso!')
         
     def test_02_close_bank(self):
+        """
+        Test close bank modal
+        """
         bank_modal = wait.until(EC.visibility_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Ir")')))
         assert bank_modal.is_displayed(), 'Promotor tem conta bancária'
         bank_modal.click() 
@@ -91,11 +96,16 @@ class TestCreateStorePromotor(unittest.TestCase):
         go_back_arrow.click()
                
     def test_03_open_store_page(self):
+        """
+        Test open "Lojas" page
+        """
         store_btn = wait.until(EC.element_to_be_clickable((AppiumBy.ACCESSIBILITY_ID, 'Lojas')))
         store_btn.click()
     
     def teste_04_add_store(self):
-        
+        """
+        Test add X amount of stores
+        """
         amount = 5
         for i in range(amount):
             add_store_btn = wait.until(EC.element_to_be_clickable((AppiumBy.ACCESSIBILITY_ID, ', Cadastrar loja')))
@@ -204,7 +214,6 @@ class TestCreateStorePromotor(unittest.TestCase):
             pending_btn.click()
             
             store = wait.until(EC.visibility_of_any_elements_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("")')))
-        
-        
+            
 if __name__ == '__main__':
     unittest.main()

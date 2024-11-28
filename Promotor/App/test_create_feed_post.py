@@ -1,8 +1,7 @@
 """
-Create X amount of products
+Create a X amount of feed posts by the "Promotor" user.
 """
 
-import time
 import os
 import sys
 import random
@@ -18,10 +17,6 @@ from selenium.common.exceptions import TimeoutException
 path_to_add = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.append(path_to_add)
 
-from Utils.get_user_input import get_user_input
-
-from Common.App.add_lip_stick_images import add_lip_stick_images_promotor, add_color_image_promotor
-
 TEST_TITLE = 'CRIAÇÃO DE PRODUTO PROMOTOR'
 QA = 'VITOR FLAMINGO LINDO'
 BACK = 'LUCAS LIZO'
@@ -29,7 +24,7 @@ MOBILE = 'LUCIANO ESPONJAS'
 
 class TestCreateFeedPostPromotor(unittest.TestCase):
     """
-    Test case for automating the process of creating products.
+    Test case for automating the process of creating feed posts.
     """
     
     def setUp(self) -> None:
@@ -57,6 +52,9 @@ class TestCreateFeedPostPromotor(unittest.TestCase):
             self.driver.quit()
     
     def test_01_login(self) -> None:
+        """
+        Test login
+        """
         email_input = wait.until(EC.visibility_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().textContains("Digite seu e-mail")')))
         email_input.send_keys(os.getenv('PRO_EMAIL'))
 
@@ -79,6 +77,9 @@ class TestCreateFeedPostPromotor(unittest.TestCase):
             print('Login realizado com sucesso!')
         
     def test_02_close_bank(self):
+        """
+        Test close bank modal
+        """
         bank_modal = wait.until(EC.visibility_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Ir")')))
         assert bank_modal.is_displayed(), 'Promotor tem conta bancária'
         bank_modal.click() 
@@ -88,11 +89,16 @@ class TestCreateFeedPostPromotor(unittest.TestCase):
         go_back_arrow.click()
                
     def test_03_open_feed_page(self):
+        """
+        Test open "Feed" page
+        """
         feed_btn = wait.until(EC.element_to_be_clickable((AppiumBy.ACCESSIBILITY_ID, 'Feed')))
         feed_btn.click()
     
     def teste_04_create_post(self):
-        
+        """
+        Test create a X amount of feed posts
+        """
         amount = 2
         for i in range(amount):
             
@@ -140,7 +146,6 @@ class TestCreateFeedPostPromotor(unittest.TestCase):
         
             sucess_modal = wait.until(EC.visibility_of_element_located((AppiumBy.ACCESSIBILITY_ID, 'Fechar')))
             sucess_modal.click()
-        
         
 if __name__ == '__main__':
     unittest.main()
