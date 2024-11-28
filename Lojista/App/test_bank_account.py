@@ -21,7 +21,7 @@ from Common.App.lojista_login import app_lojista_login
 from Utils.person import create_cnpj, create_random_first_name
 
 TEST_TITLE = 'CONTA BANCÁRIA'
-QA = 'VITOR FLAMINGO LINDO'
+QA = 'Vitor FLAMINGO LINDO'
 BACK = 'LUCAS LIZO'
 MOBILE = 'LUCIANO ESPONJAS'
 FRONT = '-'

@@ -7,6 +7,7 @@ and birth dates.
 
 import random
 from faker import Faker
+import unicodedata
 
 fake = Faker('pt_BR')
 
@@ -29,9 +30,19 @@ def create_random_first_name():
     Returns:
         str: A randomly generated first name in Portuguese (Brazilian).
     """
-    name = fake.name().split(' ')[0]
-    return name
+    while True:
+        name = fake.first_name()
+        
+        # Verificar se o nome tem menos de 3 caracteres
+        if len(name) < 3:
+            continue
 
+        # Verificar se o nome contém acentos
+        normalized_name = unicodedata.normalize('NFKD', name).encode('ASCII', 'ignore').decode('ASCII')
+        if name != normalized_name:
+            continue
+
+        return name
 
 def create_random_surname():
     """

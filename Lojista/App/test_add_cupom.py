@@ -21,7 +21,7 @@ from Common.App.lojista_login import app_lojista_login
 from Utils.get_user_input import get_user_input
 
 TEST_TITLE = 'CADASTRO DE CUPOM'
-QA = 'VITOR Flamingo Lindo'
+QA = 'Vitor Flamingo Lindo'
 BACK = 'Lucas Lizo'
 MOBILE = 'Luciano Esponjas'
 

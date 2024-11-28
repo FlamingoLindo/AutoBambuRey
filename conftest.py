@@ -3,6 +3,9 @@ from pytest_metadata.plugin import metadata_key
 from Lojista.App.test_bank_account import (TEST_TITLE, QA, BACK, MOBILE)
 from Lojista.App.test_create_product_lojista import (TEST_TITLE, QA, BACK, MOBILE)
 from Promotor.App.test_create_product_promotor import (TEST_TITLE, QA, BACK, MOBILE)
+from Promotor.App.test_create_feed_post import (TEST_TITLE, QA, BACK, MOBILE)
+from Promotor.App.test_delete_all_pending_products import (TEST_TITLE, QA, BACK, MOBILE)
+from Promotor.App.test_add_store_promotor import (TEST_TITLE, QA, BACK, MOBILE)
 from Lojista.App.test_add_cupom import (TEST_TITLE, QA, BACK, MOBILE)
   
   
