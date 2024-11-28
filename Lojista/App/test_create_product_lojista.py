@@ -2,6 +2,7 @@
 Create X amount of products
 """
 
+# Imports
 import time
 import os
 import sys
@@ -13,12 +14,15 @@ from appium import webdriver
 from appium.options.android import UiAutomator2Options
 from appium.webdriver.common.appiumby import AppiumBy
 
+# Load scripts
 path_to_add = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.append(path_to_add)
 
+# Scripts
 from Common.App.lojista_login import app_lojista_login
 from Common.App.add_lip_stick_images import add_lip_stick_images, add_color_image
 
+# Pytest metadata
 TEST_TITLE = 'CRIAÇÃO DE Lojista'
 QA = 'Vitor Flamingo Lindo'
 BACK = 'Lucas Lizo'

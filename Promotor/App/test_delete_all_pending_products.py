@@ -2,6 +2,7 @@
 Delete all pending products.
 """
 
+# Imports
 import time
 import os
 import sys
@@ -13,9 +14,11 @@ from appium.options.android import UiAutomator2Options
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.common.exceptions import TimeoutException
 
+# Load scritps
 path_to_add = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.append(path_to_add)
 
+# Pytest metadata
 TEST_TITLE = 'DELETAR TODOS OS PRODUTOS EM ANÁLISE PROMOTOR'
 QA = 'Vitor Flamingo Lindo'
 BACK = 'Lucas Lizo'

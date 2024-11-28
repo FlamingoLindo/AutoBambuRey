@@ -3,7 +3,7 @@ from selenium.webdriver.common.actions import interaction
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.actions.pointer_input import PointerInput
 
-def app_swipe(self, x1, y1, x2, y2):
+def app_swipe(self, x1: int, y1: int, x2: int, y2: int):
     """
     Simulates a swipe gesture on the screen from one point to another.
 

@@ -2,6 +2,7 @@
 Create a X amount of stores by the "Promotor" user.
 """
 
+# Imports
 import time
 import os
 import sys
@@ -17,13 +18,15 @@ from selenium.webdriver.common.actions import interaction
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.actions.pointer_input import PointerInput
 
-
+# Load scripts
 path_to_add = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.append(path_to_add)
 
+# Import scripts
 from Utils.person import create_random_first_name, create_cnpj, create_cpf, create_phone
 from Utils.addres import create_address
 
+# Pytest metadata
 TEST_TITLE = 'CRIAÇÃO DE LOJAS PROMOTOR'
 QA = 'Vitor Flamingo Lindo'
 BACK = 'Lucas Lizo'

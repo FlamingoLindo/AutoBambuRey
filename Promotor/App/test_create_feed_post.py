@@ -2,6 +2,7 @@
 Create a X amount of feed posts by the "Promotor" user.
 """
 
+# Imports
 import os
 import sys
 import random
@@ -13,10 +14,11 @@ from appium.options.android import UiAutomator2Options
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.common.exceptions import TimeoutException
 
-
+# Load scripts
 path_to_add = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.append(path_to_add)
 
+# Pytest metadata
 TEST_TITLE = 'CRIAÇÃO DE PRODUTO PROMOTOR'
 QA = 'VITOR FLAMINGO LINDO'
 BACK = 'LUCAS LIZO'

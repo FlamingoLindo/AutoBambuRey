@@ -2,6 +2,7 @@
 Add X amount of vouchers
 """
 
+# Imports
 import time
 import os
 import sys
@@ -17,13 +18,14 @@ from selenium.webdriver.common.actions import interaction
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.actions.pointer_input import PointerInput
 
+# Load scripts
 path_to_add = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.append(path_to_add)
 
+# Scripts
 from Common.App.lojista_login import app_lojista_login
 
-from Utils.get_user_input import get_user_input
-
+# Pytest metadata
 TEST_TITLE = 'CADASTRO DE VOUCHER'
 QA = 'Vitor Flamingo Lindo'
 BACK = 'Lucas Lizo'

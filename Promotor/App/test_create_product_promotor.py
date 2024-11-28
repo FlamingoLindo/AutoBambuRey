@@ -2,6 +2,7 @@
 Create a X amount of products by the "Promotor" user.
 """
 
+# Imports
 import time
 import os
 import sys
@@ -14,13 +15,15 @@ from appium.options.android import UiAutomator2Options
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.common.exceptions import TimeoutException
 
+# Load scripts
 path_to_add = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.append(path_to_add)
 
+# Scripts
 from Utils.get_user_input import get_user_input
-
 from Common.App.add_lip_stick_images import add_lip_stick_images_promotor, add_color_image_promotor
 
+# Pytest metadata
 TEST_TITLE = 'CRIAÇÃO DE PRODUTO PROMOTOR'
 QA = 'Vitor Flamingo Lindo'
 BACK = 'Lucas Lizo'

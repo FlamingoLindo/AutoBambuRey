@@ -2,6 +2,7 @@
 Approve all "Promotor" products.
 """
 
+# Imports
 import os
 import sys
 import unittest
@@ -11,11 +12,14 @@ from appium import webdriver
 from appium.options.android import UiAutomator2Options
 from appium.webdriver.common.appiumby import AppiumBy
 
+# Load scripts
 path_to_add = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.append(path_to_add)
 
+# Scripts
 from Common.App.lojista_login import app_lojista_login
 
+# Pytest metadata
 TEST_TITLE = 'APROVAR PRODUTOS DE PROMOTORES'
 QA = 'Vitor Flamingo Lindo'
 BACK = 'Lucas Lizo'
