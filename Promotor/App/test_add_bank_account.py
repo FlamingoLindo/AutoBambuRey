@@ -1,5 +1,5 @@
 """
-Delete all pending products.
+Create a X amount of stores by the "Promotor" user.
 """
 
 # Imports
@@ -13,23 +13,31 @@ from appium import webdriver
 from appium.options.android import UiAutomator2Options
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.actions import interaction
+from selenium.webdriver.common.actions.action_builder import ActionBuilder
+from selenium.webdriver.common.actions.pointer_input import PointerInput
 
-# Load scritps
+# Load scripts
 path_to_add = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.append(path_to_add)
 
-from Utils.mobile_gestures import take_screenshot_mobile
+# Import scripts
+from Utils.mobile_gestures import take_screenshot_mobile, app_tap, app_swipe
+from Utils.person import create_random_full_name, create_cpf
+from Utils.card import create_bank_account
 
 # Pytest metadata
-TEST_TITLE = 'DELETAR TODOS OS PRODUTOS EM ANÁLISE PROMOTOR'
+TEST_TITLE = 'ADICIONAR CONTA BANCÁRIA'
 QA = 'Vitor Flamingo Lindo'
 BACK = 'Lucas Lizo'
 MOBILE = 'Luciano Esponjas'
 
-class TestDelteAllPendingProductstPromotor(unittest.TestCase):
+class TestAddbankAccountPromotor(unittest.TestCase):
     """
-    Test case for automating the process of creating products.
+    Test case for automating the process of creating stores.
     """
+    
     def setUp(self) -> None:
         capabilities = dict(
         noReset=True,
@@ -91,46 +99,56 @@ class TestDelteAllPendingProductstPromotor(unittest.TestCase):
         go_back_arrow = wait.until(EC.visibility_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("")')))
         assert go_back_arrow.is_displayed(), 'Botão de "Voltar" não encontrado'
         go_back_arrow.click()
-        
-        
-    def test_03_open_store(self):
+               
+    def test_03_open_bank_page(self):
         """
-        Test open "Lojas" page
+        
         """
-        stores_btn = wait.until(EC.element_to_be_clickable((AppiumBy.ACCESSIBILITY_ID, 'Lojas')))
-        assert stores_btn.is_displayed(), 'Botão "Lojas" não encontrado'
-        stores_btn.click()
+        config_btn = wait.until(EC.element_to_be_clickable((AppiumBy.ACCESSIBILITY_ID, 'Configurações')))
+        config_btn.click()
         
-        select_store = wait.until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Flamingo")')))
-        select_store.click()
+        bank_btn = wait.until(EC.element_to_be_clickable((AppiumBy.ACCESSIBILITY_ID, 'Conta bancária')))
+        bank_btn.click()
         
-        time.sleep(1)
-        
-        pending_tab = wait.until(EC.element_to_be_clickable((AppiumBy.ACCESSIBILITY_ID, 'Pendentes')))
-        pending_tab.click()
-        
-    def test_04_delete(self):
+    def test_04_add_bank_account(self):
         """
-        Test delete all pending products
-        """
-        try:
-            trash_icon = wait.until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("").instance(0)')))
-            
-            while trash_icon.is_displayed():
-                trash_icon.click()
-                
-                published_tab = wait.until(EC.element_to_be_clickable((AppiumBy.ACCESSIBILITY_ID, 'Publicados')))
-                published_tab.click()
-                
-                pending_tab = wait.until(EC.element_to_be_clickable((AppiumBy.ACCESSIBILITY_ID, 'Pendentes')))
-                pending_tab.click()
-                
-                trash_icon = wait.until(EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("").instance(0)')))
-            
-            print('No more products!')
         
-        except Exception as e:
-            print('No more trash icons or encountered an error:', e)
-
+        """
+        bank_dropdown = wait.until(EC.visibility_of_element_located((AppiumBy.ACCESSIBILITY_ID, 'ex: Bradesco')))
+        bank_dropdown.click()
+        app_tap(self, 500, 780)
+        
+        account_type_dropdown = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, 'ex: Conta Corrente')
+        account_type_dropdown.click()
+        app_tap(self, 246, 891)
+        
+        person_type_dropdown = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, 'ex: Jurídica')
+        person_type_dropdown.click()
+        app_tap(self, 198, 1164)
+        
+        name_input = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("ex: José Maria da Silva")')
+        name_input.send_keys(create_random_full_name())
+        
+        bank = create_bank_account()
+        agency_input = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("ex: 0000"))')
+        agency_input.send_keys(bank[0])
+        
+        account_num_input = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("ex: 0000000")')
+        account_num_input.send_keys(bank[1])
+        
+        digit_input = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("ex: 0")')
+        digit_input.send_keys(bank[2])
+        
+        app_swipe(self, 500, 1500, 500, 500)
+        
+        cpf_input = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("ex: 000.000.000-00")')
+        cpf_input.send_keys(create_cpf())
+        
+        register_btn = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, 'Cadastrar')
+        register_btn.click()
+        
+        
+        
+                  
 if __name__ == '__main__':
     unittest.main()

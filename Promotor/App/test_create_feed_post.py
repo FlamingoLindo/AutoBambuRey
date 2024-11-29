@@ -18,6 +18,8 @@ from selenium.common.exceptions import TimeoutException
 path_to_add = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.append(path_to_add)
 
+from Utils.mobile_gestures import take_screenshot_mobile
+
 # Pytest metadata
 TEST_TITLE = 'CRIAÇÃO DE PRODUTO PROMOTOR'
 QA = 'VITOR FLAMINGO LINDO'
@@ -72,6 +74,7 @@ class TestCreateFeedPostPromotor(unittest.TestCase):
                 (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Email Inválido")')
             ))
             # If the error message appears, assert failure
+            take_screenshot_mobile(self)
             assert False, error_msg.text == 'Email Inválido'; f"Unexpected error message: {error_msg.text}"
         except TimeoutException:
             # No error message, login is successful

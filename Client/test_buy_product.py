@@ -15,6 +15,8 @@ from selenium.webdriver.common.actions.pointer_input import PointerInput
 path_to_add = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append(path_to_add)
 
+from Utils.mobile_gestures import take_screenshot_mobile
+
 class TestCreateProductClient(unittest.TestCase):
     """
     Test case for automating the process of creating users and 
@@ -109,6 +111,7 @@ class TestCreateProductClient(unittest.TestCase):
             print('Modal de carrinho clicado')
         else:
             print('Modal is not showing')
+            take_screenshot_mobile(self)
             assert False, 'No modal is displayed!'
 
         add_all_items = wait.until(EC.visibility_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Tudo")')))
@@ -137,6 +140,7 @@ class TestCreateProductClient(unittest.TestCase):
            
            if toast_error.is_displayed():
                print('Erro de distancia')
+               take_screenshot_mobile(self)
                assert False, 'Distance error - Toast message displayed!'
 
         except Exception as e:
@@ -159,6 +163,7 @@ class TestCreateProductClient(unittest.TestCase):
             print('Compra confirmada')
         else:
             print('Botão de confirmar compra não encontrado')
+            take_screenshot_mobile(self)
             assert False, 'No "Confirmar compra" button'
     
         try:
@@ -168,6 +173,7 @@ class TestCreateProductClient(unittest.TestCase):
             
             if toast_error.is_displayed():
                 print('Erro no pagamento\n', toast_error.text)
+                take_screenshot_mobile(self)
                 assert False, 'Payment error - Toast message displayed!'
 
         except Exception as e:

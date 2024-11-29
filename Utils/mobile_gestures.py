@@ -1,3 +1,4 @@
+import os
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.actions import interaction
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
@@ -35,3 +36,18 @@ def app_tap(self, x, y):
     This method uses the tap API to simulate a single touch tap at the coordinates (x, y).
     """
     self.driver.tap([(x, y)])
+
+def screenshot_path_mobile():
+    screenshot_dir = r'Images\Screenshots'
+    os.makedirs(screenshot_dir, exist_ok=True)
+    screenshot_path = os.path.join(screenshot_dir, 'screenshot.png')
+    
+    return screenshot_path
+
+def take_screenshot_mobile(self):
+    """
+    Takes a screenshot of the current screen and saves it to the 'Images/Screenshots' directory.
+    """
+    screenshot_path = screenshot_path_mobile()
+    self.driver.save_screenshot(screenshot_path)
+    return screenshot_path

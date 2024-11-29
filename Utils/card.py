@@ -40,3 +40,23 @@ def create_card():
             cvv = lines[3].split('CVV: ')[1].strip()
 
             return master_card, nome, codigo, exp, cvv
+        
+
+def create_bank_account():
+    """
+    Generates a random bank account with agency, account number, and digit.
+    The function uses the Faker library to generate a bank account's details,
+    including:
+    - Agency number (4 digits)
+    - Account number
+    - Account digit
+    Returns:
+        tuple: A tuple containing the following details:
+            - str: Agency number
+            - str: Account number
+            - str: Account digit
+    """
+    agency = fake.random_number(digits=4, fix_len=True)
+    account_number = ''.join([str(fake.random_digit()) for _ in range(10)])
+    account_digit = fake.random_digit()
+    return str(agency), account_number, account_digit

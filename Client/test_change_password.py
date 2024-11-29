@@ -1,6 +1,8 @@
 import time
 import os
 import sys
+import os
+from dotenv import load_dotenv
 import unittest
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -8,22 +10,20 @@ from appium import webdriver
 from appium.options.android import UiAutomator2Options
 from appium.webdriver.common.appiumby import AppiumBy
 
+load_dotenv()
+
 path_to_add = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append(path_to_add)
 
-from Utils.address import create_address
-from Utils.mobile_gestures import app_swipe
-from Utils.mobile_gestures import take_screenshot_mobile
-
 # Pytest metadata
-TEST_TITLE = 'CRIAÇÃO DE LOJAS PROMOTOR'
+TEST_TITLE = 'ALTERAÇÃO DE SENHA DO CLIENTE'
 QA = 'Vitor Flamingo Lindo'
 BACK = 'Lucas Lizo'
 MOBILE = 'Luciano Esponjas'
 
-class TestAddaddressClient(unittest.TestCase):
+class TestChangeClientPassword(unittest.TestCase):
     """
-    
+    Test the change password process for the client.
     """
 
     def setUp(self) -> None:
@@ -54,8 +54,6 @@ class TestAddaddressClient(unittest.TestCase):
         """
         Test that the menu button is visible and clickable.
         """
-        time.sleep(6)
-        
         menu_btn = wait.until(EC.visibility_of_element_located((AppiumBy.ACCESSIBILITY_ID, 'Menu')))
         assert menu_btn.is_displayed(), "Menu button is not visible"
         print('Menu opened successfully')
@@ -71,67 +69,50 @@ class TestAddaddressClient(unittest.TestCase):
         login_btn.click()
 
         email = wait.until(EC.visibility_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Digite seu e-mail")')))
-        email.send_keys('flamingolindo1@gmail.com')
+        email.send_keys(os.getenv('CLI_EMAIL'))
 
         password = wait.until(EC.visibility_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Digite sua senha")')))
-        password.send_keys('Aa12345678!')
+        password.send_keys(os.getenv('CLI_PASS'))
 
         log_in = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Entrar")')
         log_in.click()
         print('Logged in successfully')
 
-    def test_03_open_address_page(self) -> None:
+    def test_03_open_password_page(self) -> None:
         """
         
         """
         profile_btn = wait.until(EC.element_to_be_clickable((AppiumBy.ACCESSIBILITY_ID, 'Perfil')))
         profile_btn.click()
         
-        address_btn = wait.until(EC.element_to_be_clickable((AppiumBy.ACCESSIBILITY_ID, 'Meus endereços')))
-        address_btn.click()
+        change_password_btn = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, 'Alterar senha')
+        change_password_btn.click()
         
-    def test_04_add_address(self) -> None:
+    def test_04_change_password(self) -> None:
         """
         
         """
-        amount = 50
-        for i in range (amount):
-            try:
-                add_btn = wait.until(EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().description("Adicionar endereço"))')))
-            except:
-                take_screenshot_mobile(self)
-                assert False, 'Could not find register address button'
-            time.sleep(0.5)
-            add_btn.click()
-            
-            address = create_address()
-            cep_input = wait.until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("ex: 12345-678")')))
-            cep_input.send_keys(address[3])
-            
-            state_input = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("ex: São Paulo").instance(0)')
-            state_input.send_keys(address[4])
-            
-            city_input = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("ex: São Paulo")')
-            city_input.send_keys(address[2])
-            
-            neighborhood_input = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("ex: Jardim Paulista")')
-            neighborhood_input.send_keys('Bairro')
-            
-            log_input = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("ex: rua, avenida, praça...")')
-            log_input.send_keys('Logradouro')
-            
-            number_input = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("ex: 100")')
-            number_input.send_keys(address[1])
-            
-            app_swipe(self, 500, 2000, 500, 500)
-            
-            save_btn = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, 'Salvar endereço')
-            save_btn.click()
-            
-            time.sleep(0.5)
-            
-            print(f'Endereço {i+1} cadastrado')
-            
+        new_password = 'Aa123456789!'
+        current_password_input = wait.until(EC.visibility_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.EditText").instance(0)')))
+        current_password_input.send_keys(os.getenv('CLI_PASS'))
+        
+        new_password_input = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.EditText").instance(1)')
+        new_password_input.send_keys(new_password)
+        
+        confirm_new_password_input = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.EditText").instance(2)')
+        confirm_new_password_input.send_keys(new_password)
+        
+        change_password = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, 'Alterar senha')
+        change_password.click()
+        
+    def test_05_modal_message(self) -> None:
+        """
+        
+        """
+        modal = wait.until(EC.visibility_of_element_located((AppiumBy.ACCESSIBILITY_ID, 'Continuar')))
+        assert modal.is_displayed(), "Modal message is not displayed"
+        print('Password changed successfully')
+        modal.click()
         
         
 

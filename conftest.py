@@ -1,4 +1,8 @@
-from pytest_metadata.plugin import metadata_key  
+import base64  
+import os  
+import pytest  
+import pytest_html  
+from pytest_metadata.plugin import metadata_key
 
 # Lojista
 # from Lojista.App.test_bank_account import (TEST_TITLE, QA, BACK, MOBILE)
@@ -12,9 +16,33 @@ from pytest_metadata.plugin import metadata_key
 # from Promotor.App.test_create_feed_post import (TEST_TITLE, QA, BACK, MOBILE)
 # from Promotor.App.test_delete_all_pending_products import (TEST_TITLE, QA, BACK, MOBILE)
 # from Promotor.App.test_add_store_promotor import (TEST_TITLE, QA, BACK, MOBILE)
+from Promotor.App.test_add_bank_account import (TEST_TITLE, QA, BACK, MOBILE)
 
 # Cliente
-from Client.test_add_addres import (TEST_TITLE, QA, BACK, MOBILE)
+# from Client.test_add_addres import (TEST_TITLE, QA, BACK, MOBILE)
+# from Client.test_change_password import (TEST_TITLE, QA, BACK, MOBILE)
+# from Client.test_add_card import (TEST_TITLE, QA, BACK, MOBILE)
+
+@pytest.hookimpl(hookwrapper=True)  
+def pytest_runtest_makereport(item):  
+    outcome = yield  
+    report = outcome.get_result()  
+    extra = getattr(report, "extra", [])  
+    if report.when == "call":  
+        # Assuming your screenshot is saved correctly at the specified path  
+        screenshot_path = os.path.join(os.getcwd(), 'Images', 'Screenshots', 'screenshot.png')
+        if os.path.exists(screenshot_path):
+            try:
+                with open(screenshot_path, "rb") as image_file:  
+                    encoded_string = base64.b64encode(  
+                        image_file.read()  
+                    ).decode()  # https://github.com/pytest-dev/pytest-html/issues/265  
+                extra.append(pytest_html.extras.png(encoded_string))  
+                report.extra = extra
+            except PermissionError:
+                print(f"Permission denied: '{screenshot_path}'")
+        else:
+            print(f"File not found: '{screenshot_path}'")
 
 def pytest_html_report_title(report):  
     report.title = TEST_TITLE

@@ -25,6 +25,7 @@ sys.path.append(path_to_add)
 # Import scripts
 from Utils.person import create_random_first_name, create_cnpj, create_cpf, create_phone
 from Utils.address import create_address
+from Utils.mobile_gestures import take_screenshot_mobile
 
 # Pytest metadata
 TEST_TITLE = 'CRIAÇÃO DE LOJAS PROMOTOR'
@@ -80,6 +81,7 @@ class TestCreateStorePromotor(unittest.TestCase):
                 (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Email Inválido")')
             ))
             # If the error message appears, assert failure
+            take_screenshot_mobile(self)
             assert False, error_msg.text == 'Email Inválido'; f"Unexpected error message: {error_msg.text}"
         except TimeoutException:
             # No error message, login is successful
