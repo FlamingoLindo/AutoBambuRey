@@ -11,7 +11,7 @@ from appium.webdriver.common.appiumby import AppiumBy
 path_to_add = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append(path_to_add)
 
-from Utils.addres import create_address
+from Utils.address import create_address
 from Utils.mobile_gestures import app_swipe
 
 # Pytest metadata
@@ -20,7 +20,7 @@ QA = 'Vitor Flamingo Lindo'
 BACK = 'Lucas Lizo'
 MOBILE = 'Luciano Esponjas'
 
-class TestAddAddresClient(unittest.TestCase):
+class TestAddaddressClient(unittest.TestCase):
     """
     
     """
@@ -79,17 +79,17 @@ class TestAddAddresClient(unittest.TestCase):
         log_in.click()
         print('Logged in successfully')
 
-    def test_03_open_addres_page(self) -> None:
+    def test_03_open_address_page(self) -> None:
         """
         
         """
         profile_btn = wait.until(EC.element_to_be_clickable((AppiumBy.ACCESSIBILITY_ID, 'Perfil')))
         profile_btn.click()
         
-        addres_btn = wait.until(EC.element_to_be_clickable((AppiumBy.ACCESSIBILITY_ID, 'Meus endereços')))
-        addres_btn.click()
+        address_btn = wait.until(EC.element_to_be_clickable((AppiumBy.ACCESSIBILITY_ID, 'Meus endereços')))
+        address_btn.click()
         
-    def test_04_add_addres(self) -> None:
+    def test_04_add_address(self) -> None:
         """
         
         """
@@ -98,19 +98,19 @@ class TestAddAddresClient(unittest.TestCase):
             try:
                 add_btn = wait.until(EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().description("Adicionar endereço"))')))
             except:
-                assert False, 'Could not find register addres button'
+                assert False, 'Could not find register address button'
             time.sleep(0.5)
             add_btn.click()
             
-            addres = create_address()
+            address = create_address()
             cep_input = wait.until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("ex: 12345-678")')))
-            cep_input.send_keys(addres[3])
+            cep_input.send_keys(address[3])
             
             state_input = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("ex: São Paulo").instance(0)')
-            state_input.send_keys(addres[4])
+            state_input.send_keys(address[4])
             
             city_input = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("ex: São Paulo")')
-            city_input.send_keys(addres[2])
+            city_input.send_keys(address[2])
             
             neighborhood_input = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("ex: Jardim Paulista")')
             neighborhood_input.send_keys('Bairro')
@@ -119,7 +119,7 @@ class TestAddAddresClient(unittest.TestCase):
             log_input.send_keys('Logradouro')
             
             number_input = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("ex: 100")')
-            number_input.send_keys(addres[1])
+            number_input.send_keys(address[1])
             
             app_swipe(self, 500, 2000, 500, 500)
             

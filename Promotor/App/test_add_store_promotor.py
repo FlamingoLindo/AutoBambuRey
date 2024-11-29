@@ -24,7 +24,7 @@ sys.path.append(path_to_add)
 
 # Import scripts
 from Utils.person import create_random_first_name, create_cnpj, create_cpf, create_phone
-from Utils.addres import create_address
+from Utils.address import create_address
 
 # Pytest metadata
 TEST_TITLE = 'CRIAÇÃO DE LOJAS PROMOTOR'
@@ -164,16 +164,16 @@ class TestCreateStorePromotor(unittest.TestCase):
             store_phone_input = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Digite aqui...").instance(0)')
             store_phone_input.send_keys(create_phone())
 
-            # Addres
-            addres = create_address()
+            # address
+            address = create_address()
             cep_input = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Digite aqui...").instance(0)')
-            cep_input.send_keys(addres[3])
+            cep_input.send_keys(address[3])
             
             log_input = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Digite aqui...").instance(0)')
             log_input.send_keys('Banana')
             
             num_input = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Digite aqui...").instance(0)')
-            num_input.send_keys(addres[1])
+            num_input.send_keys(address[1])
             
             comple_input = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Digite aqui...").instance(0)')
             comple_input.send_keys('Complemento')
@@ -192,12 +192,12 @@ class TestCreateStorePromotor(unittest.TestCase):
             neigh_input.send_keys('Bairro')
 
             city_input = wait.until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Digite aqui...").instance(0)')))
-            city_input.send_keys(addres[2])
+            city_input.send_keys(address[2])
             
             time.sleep(1)
             
             uf_input = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Digite aqui...")')
-            uf_input.send_keys(addres[4])
+            uf_input.send_keys(address[4])
             
             # Segment
             categ_dropdown = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, 'Selecione um segmento...')

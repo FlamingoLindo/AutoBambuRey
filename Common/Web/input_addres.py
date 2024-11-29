@@ -1,5 +1,5 @@
 """
-This module is used for inputing an addres.
+This module is used for inputing an address.
 """
 
 # Imports
@@ -14,10 +14,10 @@ path_to_add = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append(path_to_add)
 
 # Utils
-from Utils.addres import create_address
+from Utils.address import create_address
 
-def input_addres(wait, driver):
-    """Input addres elements
+def input_address(wait, driver):
+    """Input address elements
 
     Args:
         wait (WebDriverWait): Selenium WebDriverWait instance used 
