@@ -5,23 +5,23 @@ import pytest_html
 from pytest_metadata.plugin import metadata_key
 
 # Lojista
-# from Lojista.App.test_bank_account import (TEST_TITLE, QA, BACK, MOBILE)
-# from Lojista.App.test_create_product_lojista import (TEST_TITLE, QA, BACK, MOBILE)
-# from Lojista.App.test_add_cupom import (TEST_TITLE, QA, BACK, MOBILE)
-# from Lojista.App.test_add_voucher import (TEST_TITLE, QA, BACK, MOBILE)
-# from Lojista.App.test_approve_promotor_products import (TEST_TITLE, QA, BACK, MOBILE)
+# from Lojista.App.test_bank_account import (TEST_TITLE, QA, BACK, MOBILE, TYPE)
+# from Lojista.App.test_create_product_lojista import (TEST_TITLE, QA, BACK, MOBILE, TYPE)
+# from Lojista.App.test_add_cupom import (TEST_TITLE, QA, BACK, MOBILE, TYPE)
+# from Lojista.App.test_add_voucher import (TEST_TITLE, QA, BACK, MOBILE, TYPE)
+# from Lojista.App.test_approve_promotor_products import (TEST_TITLE, QA, BACK, MOBILE, TYPE)
 
 # Promotor
-# from Promotor.App.test_create_product_promotor import (TEST_TITLE, QA, BACK, MOBILE)
-# from Promotor.App.test_create_feed_post import (TEST_TITLE, QA, BACK, MOBILE)
-# from Promotor.App.test_delete_all_pending_products import (TEST_TITLE, QA, BACK, MOBILE)
-# from Promotor.App.test_add_store_promotor import (TEST_TITLE, QA, BACK, MOBILE)
-from Promotor.App.test_add_bank_account import (TEST_TITLE, QA, BACK, MOBILE)
+# from Promotor.App.test_create_product_promotor import (TEST_TITLE, QA, BACK, MOBILE, TYPE)
+# from Promotor.App.test_create_feed_post import (TEST_TITLE, QA, BACK, MOBILE, TYPE)
+# from Promotor.App.test_delete_all_pending_products import (TEST_TITLE, QA, BACK, MOBILE, TYPE)
+# from Promotor.App.test_add_store_promotor import (TEST_TITLE, QA, BACK, MOBILE, TYPE)
+from Promotor.App.test_add_bank_account import (TEST_TITLE, QA, BACK, MOBILE, TYPE)
 
 # Cliente
-# from Client.test_add_addres import (TEST_TITLE, QA, BACK, MOBILE)
-# from Client.test_change_password import (TEST_TITLE, QA, BACK, MOBILE)
-# from Client.test_add_card import (TEST_TITLE, QA, BACK, MOBILE)
+# from Client.test_add_addres import (TEST_TITLE, QA, BACK, MOBILE, TYPE)
+# from Client.test_change_password import (TEST_TITLE, QA, BACK, MOBILE, TYPE)
+# from Client.test_add_card import (TEST_TITLE, QA, BACK, MOBILE, TYPE)
 
 @pytest.hookimpl(hookwrapper=True)  
 def pytest_runtest_makereport(item):  
@@ -50,7 +50,7 @@ def pytest_html_report_title(report):
 def pytest_configure(config):
     config.option.htmlpath = 'Reports/report.html'
   
-    config.stash[metadata_key]["Projeto"] = "Bamburey"  
+    config.stash[metadata_key]["Projeto"] = f"Bamburey {TYPE}"  
     config.stash[metadata_key]["QA"] = f"{QA}" 
     config.stash[metadata_key]["Back"] = f"{BACK}"
     config.stash[metadata_key]["Mobile"] = f"{MOBILE}" 

@@ -27,6 +27,7 @@ TEST_TITLE = 'CRIAÇÃO DE Lojista'
 QA = 'Vitor Flamingo Lindo'
 BACK = 'Lucas Lizo'
 MOBILE = 'Luciano Esponjas'
+TYPE = 'Lojista'
 
 class TestCreateProductLojista(unittest.TestCase):
     """

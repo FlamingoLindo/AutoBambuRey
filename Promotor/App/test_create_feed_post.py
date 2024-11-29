@@ -25,6 +25,7 @@ TEST_TITLE = 'CRIAÇÃO DE PRODUTO PROMOTOR'
 QA = 'VITOR FLAMINGO LINDO'
 BACK = 'LUCAS LIZO'
 MOBILE = 'LUCIANO ESPONJAS'
+TYPE = 'Promotor'
 
 class TestCreateFeedPostPromotor(unittest.TestCase):
     """

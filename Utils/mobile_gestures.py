@@ -1,3 +1,6 @@
+"""
+This module contains utility functions for performing mobile gestures
+"""
 import os
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.actions import interaction
@@ -18,7 +21,8 @@ def app_swipe(self, x1: int, y1: int, x2: int, y2: int):
     starting from the coordinates (x1, y1) and ending at (x2, y2).
     """
     actions = ActionChains(self.driver)
-    actions.w3c_actions = ActionBuilder(self.driver, mouse=PointerInput(interaction.POINTER_TOUCH, "touch"))
+    actions.w3c_actions = ActionBuilder(self.driver, mouse=PointerInput
+                                        (interaction.POINTER_TOUCH, "touch"))
     actions.w3c_actions.pointer_action.move_to_location(x1, y1)
     actions.w3c_actions.pointer_action.pointer_down()
     actions.w3c_actions.pointer_action.move_to_location(x2, y2)
@@ -38,10 +42,12 @@ def app_tap(self, x, y):
     self.driver.tap([(x, y)])
 
 def screenshot_path_mobile():
+    """
+    Generates the path where the screenshot will be saved.
+    """
     screenshot_dir = r'Images\Screenshots'
     os.makedirs(screenshot_dir, exist_ok=True)
     screenshot_path = os.path.join(screenshot_dir, 'screenshot.png')
-    
     return screenshot_path
 
 def take_screenshot_mobile(self):

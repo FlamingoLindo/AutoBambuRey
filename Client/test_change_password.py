@@ -20,6 +20,7 @@ TEST_TITLE = 'ALTERAÇÃO DE SENHA DO CLIENTE'
 QA = 'Vitor Flamingo Lindo'
 BACK = 'Lucas Lizo'
 MOBILE = 'Luciano Esponjas'
+TYPE = 'Cliente'
 
 class TestChangeClientPassword(unittest.TestCase):
     """

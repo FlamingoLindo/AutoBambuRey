@@ -40,7 +40,6 @@ def create_card():
             cvv = lines[3].split('CVV: ')[1].strip()
 
             return master_card, nome, codigo, exp, cvv
-        
 
 def create_bank_account():
     """

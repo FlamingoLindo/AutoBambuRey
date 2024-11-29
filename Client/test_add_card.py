@@ -23,6 +23,7 @@ TEST_TITLE = 'CADASTRO DE CARTÃO DE CRÉDITO CLIENTE'
 QA = 'Vitor Flamingo Lindo'
 BACK = 'Lucas Lizo'
 MOBILE = 'Luciano Esponjas'
+TYPE = 'Cliente'
 
 class TestAddClientCard(unittest.TestCase):
     """

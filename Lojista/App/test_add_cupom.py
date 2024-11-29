@@ -29,6 +29,7 @@ TEST_TITLE = 'CADASTRO DE CUPOM'
 QA = 'Vitor Flamingo Lindo'
 BACK = 'Lucas Lizo'
 MOBILE = 'Luciano Esponjas'
+TYPE = 'Lojista'
 
 class TestCreateCupon(unittest.TestCase):
 

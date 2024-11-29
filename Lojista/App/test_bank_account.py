@@ -30,6 +30,7 @@ TEST_TITLE = 'CONTA BANCÁRIA'
 QA = 'Vitor Flamingo Lindo'
 BACK = 'Lucas Lizo'
 MOBILE = 'Luciano Esponjas'
+TYPE = 'Lojista'
 
 class TestBankAccount(unittest.TestCase):
 

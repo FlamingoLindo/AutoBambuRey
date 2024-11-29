@@ -28,10 +28,11 @@ from Utils.person import create_random_full_name, create_cpf
 from Utils.card import create_bank_account
 
 # Pytest metadata
-TEST_TITLE = 'ADICIONAR CONTA BANCÁRIA'
+TEST_TITLE = 'ADICIONAR CONTA BANCÁRIA PROMOTOR'
 QA = 'Vitor Flamingo Lindo'
 BACK = 'Lucas Lizo'
 MOBILE = 'Luciano Esponjas'
+TYPE = 'Promotor'
 
 class TestAddbankAccountPromotor(unittest.TestCase):
     """
@@ -107,7 +108,7 @@ class TestAddbankAccountPromotor(unittest.TestCase):
         config_btn = wait.until(EC.element_to_be_clickable((AppiumBy.ACCESSIBILITY_ID, 'Configurações')))
         config_btn.click()
         
-        bank_btn = wait.until(EC.element_to_be_clickable((AppiumBy.ACCESSIBILITY_ID, 'Conta bancária')))
+        bank_btn = wait.until(EC.element_to_be_clickable((AppiumBy.ACCESSIBILITY_ID, 'Conta bancária, ')))
         bank_btn.click()
         
     def test_04_add_bank_account(self):
@@ -130,7 +131,7 @@ class TestAddbankAccountPromotor(unittest.TestCase):
         name_input.send_keys(create_random_full_name())
         
         bank = create_bank_account()
-        agency_input = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("ex: 0000"))')
+        agency_input = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("ex: 0000")')
         agency_input.send_keys(bank[0])
         
         account_num_input = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("ex: 0000000")')
@@ -146,6 +147,14 @@ class TestAddbankAccountPromotor(unittest.TestCase):
         
         register_btn = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, 'Cadastrar')
         register_btn.click()
+        
+        try:
+            error_msm = wait.until(EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().resourceId("toastContentContainer")')))
+            if error_msm.is_displayed():
+                take_screenshot_mobile(self)
+                assert False, f'Adicione o dígito verificador da conta'
+        except Exception as e:
+            raise AssertionError("An error occurred while adding the bank account") from e
         
         
         

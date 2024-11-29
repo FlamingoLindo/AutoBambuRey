@@ -25,6 +25,7 @@ TEST_TITLE = 'DELETAR TODOS OS PRODUTOS EM ANÁLISE PROMOTOR'
 QA = 'Vitor Flamingo Lindo'
 BACK = 'Lucas Lizo'
 MOBILE = 'Luciano Esponjas'
+TYPE = 'Promotor'
 
 class TestDelteAllPendingProductstPromotor(unittest.TestCase):
     """

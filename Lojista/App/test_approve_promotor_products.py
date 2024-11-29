@@ -24,6 +24,7 @@ TEST_TITLE = 'APROVAR PRODUTOS DE PROMOTORES'
 QA = 'Vitor Flamingo Lindo'
 BACK = 'Lucas Lizo'
 MOBILE = 'Luciano Esponjas'
+TYPE = 'Lojista'
 
 class TestApprovePromotorProducts(unittest.TestCase):
 

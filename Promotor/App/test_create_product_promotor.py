@@ -29,6 +29,7 @@ TEST_TITLE = 'CRIAÇÃO DE PRODUTO PROMOTOR'
 QA = 'Vitor Flamingo Lindo'
 BACK = 'Lucas Lizo'
 MOBILE = 'Luciano Esponjas'
+TYPE = 'Promotor'
 
 class TestCreateProductPromotor(unittest.TestCase):
     """

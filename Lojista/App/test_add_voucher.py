@@ -30,6 +30,7 @@ TEST_TITLE = 'CADASTRO DE VOUCHER'
 QA = 'Vitor Flamingo Lindo'
 BACK = 'Lucas Lizo'
 MOBILE = 'Luciano Esponjas'
+TYPE = 'Lojista'
 
 class TestCreateVoucher(unittest.TestCase):
 

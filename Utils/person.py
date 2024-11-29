@@ -5,9 +5,9 @@ names, emails, identification numbers (CNPJ, CPF), phone numbers, passwords,
 and birth dates.
 """
 
+import unicodedata
 import random
 from faker import Faker
-import unicodedata
 
 fake = Faker('pt_BR')
 
