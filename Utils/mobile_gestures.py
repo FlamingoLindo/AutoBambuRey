@@ -2,10 +2,14 @@
 This module contains utility functions for performing mobile gestures
 """
 import os
+import time
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.actions import interaction
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.actions.pointer_input import PointerInput
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
+from appium.webdriver.common.appiumby import AppiumBy
 
 def app_swipe(self, x1: int, y1: int, x2: int, y2: int):
     """
@@ -57,3 +61,7 @@ def take_screenshot_mobile(self):
     screenshot_path = screenshot_path_mobile()
     self.driver.save_screenshot(screenshot_path)
     return screenshot_path
+
+def swipe_to_element(wait, uiautomator_selector: str, driver):
+    pass
+
